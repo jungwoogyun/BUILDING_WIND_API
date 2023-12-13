@@ -138,12 +138,12 @@ body{
    top:calc(-50vh + 90%);
    left:0px;
    width:20px;
-   height : 100px;
    background-color: black;
    opacity: 0.5;
    z-index:999;
    border-radius: 0 5px 5px 0;
-   transition:0.5s;
+   transition:0.3s;
+   transition-timing-function: ease-in-out;
 }
 .ToRight{
     transform:translateX(400px);
