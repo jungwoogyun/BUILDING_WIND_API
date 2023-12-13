@@ -18,9 +18,13 @@
   
   
 body{
-   
+    font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
     width:100%;
+}
+body::-webkit-scrollbar{
+    display: none;
+
 }
 .wrapper{
      /* 1600px; 900px */
@@ -62,26 +66,29 @@ body{
     display:flex;
     justify-content: left;
     align-items: center;
-  
 
    
 }
 .wrapper>header>.top-header>.container-xxl>.left:nth-child(1){
-    width:50rem;   
+    width:50rem; 
+    font-weight:800;  
 }
 .wrapper>header>.top-header>.container-xxl>.left:nth-child(2){
-    background-color: red;
-    
+     
 }
 
 .wrapper>header>.top-header .right{
     display:flex;
-    justify-content: right;
+    justify-content: center;
     align-items: center;
     text-align:right;
     width : 50px;
     color:white;
     margin:0px;padding:0px;
+
+
+  
+   
 }
 .wrapper>header>.top-header .right a{
     color:white;
@@ -111,20 +118,52 @@ body{
    
     border : 2px solid white;
     background-color: #1D5087;
+    
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   
 }
 .wrapper>header>nav ul li a{
     display :block;
 }
+.wrapper>header>nav ul li a>.title{
+    font-size : 0.8rem;
+    margin-top:7px;
+}
+.wrapper>header>nav ul li a>img{
+    width : 50px;
+    height : 50px;
+}
+
 /* MAIN */
 
 .wrapper>main{
     height : 800px;
     margin-top :180px;
-    background-color: orange;
-   
-   
+    
+
 }
+.wrapper>main>section{
+
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.wrapper>main>section>#map{
+    width:100vw;
+    height:100vh;
+
+    
+    background-color: orange;
+}
+
+
+
 
 /* FOOTER */
 .wrapper>footer{
@@ -135,15 +174,19 @@ body{
 /* OPENCANVAS */
 .offcanvas_btn{
    position:fixed;
-   top:calc(-50vh + 90%);
+   top:45%;
    left:0px;
    width:20px;
    background-color: black;
-   opacity: 0.5;
+   opacity: 0.3;
    z-index:999;
    border-radius: 0 5px 5px 0;
    transition:0.3s;
    transition-timing-function: ease-in-out;
+}
+.offcanvas_btn img{
+    width :20px;
+    
 }
 .ToRight{
     transform:translateX(400px);
@@ -157,6 +200,26 @@ body{
     height:100vh;
     width:400px;
     background-color: black;
-    opacity: 0.4;
+    opacity: 0.3;
     z-index: 1;
 }
+
+
+/* MODAL */
+.modal-header{
+    
+    background-color : #2A76C7 !important;
+    height : 50px;
+    line-height:50px;
+    font-size:0.6rem;
+    color:white;
+}
+.modal-header button{
+    color:white;
+    background-color: white;
+}
+
+
+
+
+
