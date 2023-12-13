@@ -1,0 +1,37 @@
+                   .wrapper::after
+                    {
+                        content:'';
+                        background-color:lightgray;
+                        position:fixed;
+                        left:0px;top:0px;
+                        width:100vw;
+                        height:100vh;
+                        opacity:0.2;
+                        z-index:-1;
+                    }
+
+                    .join_block{
+                        width:450px;
+                        height:650px;
+                        margin:50px auto;
+                        position:relative;
+                        z-index:2;
+
+                        border-radius :5px;
+                        padding:20px;
+                        box-shadow: 5px 5px 5px lightgray;
+                        background-color : white;
+                        font-size:0.9rem;
+
+                    }
+                    .join_block>.header{
+                        text-align:center;
+                        margin-bottom:20px;
+                    }
+                    .join_block>.body{}
+                    .join_block>.body label{
+                        font-size:0.8rem;
+                    }
+                    .join_block>.body>.joinform>*{
+                        margin-bottom:5px;
+                    }

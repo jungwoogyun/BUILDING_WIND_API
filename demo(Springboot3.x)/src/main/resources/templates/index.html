@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- th:fragment     -->
+    <th:block th:insert="~{fragments/head :: headOutterLink}" />
+
+    <!-- common.css   -->
+    <link rel="stylesheet" href="/css/common.css">
+
+
+
+</head>
+<body>
+
+
+<div class="wrapper">
+    <header>
+        <!-- th:fragment     -->
+        <div th:replace="~{fragments/header :: headerFragment}" />
+
+    </header>
+
+    <main class="container-xxl" style="height:800px;">
+
+        <section>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- th:fragment     -->
+        <div th:replace="fragments/footer :: footerFragment" />
+
+</div>
+
+
+
+<!-- axios -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- common.js   -->
+<script src="/js/common.js"></script>
+
+</body>
+</html>
+
