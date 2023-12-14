@@ -40,9 +40,9 @@ body::-webkit-scrollbar{
     left:0px;
     top:0px;
     width:100%;
-    height : 180px;
+    height : 200px;
     background-color: white;
-    z-index : 2;
+    z-index : 555;
 }
 
 .wrapper>header>.top-header{
@@ -53,13 +53,15 @@ body::-webkit-scrollbar{
 
     
 }
-.wrapper>header>.top-header>.container-xxl{
+.wrapper>header>.top-header>div{
     height : 60px;
     display: flex;
     justify-content: space-between;
     align-items : center;
     color:white;
     font-size:1.2rem;
+    padding-left : 50px;
+    padding-right : 50px;
 }
 .wrapper>header>.top-header .left{
     text-align: left;
@@ -69,18 +71,18 @@ body::-webkit-scrollbar{
 
    
 }
-.wrapper>header>.top-header>.container-xxl>.left:nth-child(1){
+.wrapper>header>.top-header>div>.left:nth-child(1){
     width:50rem; 
     font-weight:800;  
 }
-.wrapper>header>.top-header>.container-xxl>.left:nth-child(2){
+.wrapper>header>.top-header>div>.left:nth-child(2){
      
 }
 
 .wrapper>header>.top-header .right{
     display:flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: right;
+    align-items: right;
     text-align:right;
     width : 50px;
     color:white;
@@ -98,23 +100,27 @@ body::-webkit-scrollbar{
 }
 .wrapper>header>nav{
     width:100vw;
-    height : 120px;
+    height : 140px;
     padding : 0px;
     overflow:hidden;
     background-color: #2A76C7;
 
 }
+.wrapper>header>nav>div{
+    padding-left:50px;
+}
+
 .wrapper>header>nav ul {
     
     margin : 0px;
-    padding : 0px;
+    padding : 10px;
     left : -10px;
    
 }
 .wrapper>header>nav ul li{
     
-    width : 100px;
-    height : 100px;
+    width : 120px;
+    height : 120px;
    
     border : 2px solid white;
     background-color: #1D5087;
@@ -140,7 +146,7 @@ body::-webkit-scrollbar{
 /* MAIN */
 
 .wrapper>main{
-    height : 800px;
+  
     margin-top :180px;
     
 
@@ -151,31 +157,30 @@ body::-webkit-scrollbar{
     display:flex;
     justify-content: center;
     align-items: center;
-    
+    height:800px;
 }
 
 .wrapper>main>section>#map{
-    width:100vw;
-    height:100vh;
-
-    
-    background-color: orange;
-}
-
-.leaflet-control-container{
-    
-
-    width : 50px;
-    ;    
-}
-.leaflet-control-zoom{
  
+    position:fixed;
+    width:100vw;
+    height:800px;    
+}
+
+.wrapper>main>section>#map .leaflet-control-container{
+    width : 50px;
+    top:5%;  
+    
+}
+.wrapper>main>section>#map  .leaflet-control-zoom{
+    
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    position:absolute;
-    left:85vw;
+    position:relative;
+    left:90vw;
+
 }
 
 
@@ -215,7 +220,7 @@ body::-webkit-scrollbar{
     width:400px;
     background-color: black;
     opacity: 0.3;
-    z-index: 1;
+    z-index: 400;
 }
 
 

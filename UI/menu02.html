@@ -35,7 +35,7 @@
     <div class="wrapper">
         <header>
             <div class="top-header">
-                 
+                <h1>MENU02</h1>
             </div>
             <nav>
 
@@ -49,7 +49,6 @@
         </footer>
 
     </div>
-
 
 
    <!-- BS5  JS -->
@@ -66,6 +65,12 @@
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
    <!-- JS -->
-   <script src="js/common.js"></script>
+   <script>
+    // 팝업창 종료 전달
+    window.addEventListener('unload',function(){
+        opener.postMessage("02", '*');
+    })
+</script>
+
 </body>
 </html>

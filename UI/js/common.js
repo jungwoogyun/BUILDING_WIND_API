@@ -15,8 +15,8 @@ offcanvas_btn_el.addEventListener('click', function(){
 // Nav li Click Event
 //--------------------------
 
+let menuActiveArr = []; //활성화 여부
 const nav_menu_img_items = document.querySelectorAll('nav li>a');
-
 nav_menu_img_items.forEach(item =>{
     
    
@@ -32,7 +32,23 @@ nav_menu_img_items.forEach(item =>{
             let str = imgEl.getAttribute('src');
             str = str.substring(0,str.indexOf('_'))+".png";
             imgEl.setAttribute('src',str);
-            //MODAL WINDOW OR.. WINDOW.OPEN90
+            
+            //ALERTPOPUP WINDOW
+            const submenuUrl =  item.getAttribute('data-submenu');
+            const submenuIdx = item.getAttribute('data-idx');
+            
+            var popupWidth = 1200;
+            var popupHeight = 800;
+            var popupX = (window.screen.width / 2) - (popupWidth / 2);
+            // 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+            var popupY= (window.screen.height / 2) - (popupHeight / 2);
+            // 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
+            menuActiveArr[submenuIdx] =  window.open(submenuUrl+".html", '', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+            console.log(submenuIdx,menuActiveArr[submenuIdx]);
+            
+            //팝업창 x버튼에 대한 이벤트 처리
+
+            
 
         }else{
             //IMAGE CHANGE
@@ -42,6 +58,11 @@ nav_menu_img_items.forEach(item =>{
             str = str.substring(0,str.indexOf('.'))+"_off.png";
             imgEl.setAttribute('src',str);
 
+            //ALERTPOPUP WINDOW CLOSE
+            const submenuIdx = item.getAttribute('data-idx');
+            menuActiveArr[submenuIdx].close();
+            
+
         }
 
     })
@@ -49,41 +70,39 @@ nav_menu_img_items.forEach(item =>{
 })
 
 //--------------------------
-// 모달 드래그 가능하게 만들기(테스트)
+// POP Close Event Function ( X 버튼 눌렀을때 부모창 메뉴 스타일변경)
 //--------------------------
-var isMouseDown = false;
-var offsetX, offsetY;
+ // 부모 창에서 메시지를 받는 이벤트 리스너 등록
+ window.addEventListener('message', function (event) {
+  // event.data에 자식 창에서 전달한 데이터가 들어 있음
+  const receivedMessage = event.data;
+  console.log('자식 창으로부터 받은 메시지:', receivedMessage);
+  
+  //
+  const nav_menu_img_items = document.querySelectorAll('nav li>a');
+  nav_menu_img_items.forEach(item => {
+    const submenuUrl =  item.getAttribute('data-submenu');
+    if(submenuUrl.includes(receivedMessage)){
+      item.setAttribute("data-toggle","off");
+      const imgEl = item.firstElementChild;
+      let str = imgEl.getAttribute('src');
+      if(!str.includes('_off'))
+        str = str.substring(0,str.indexOf('.'))+"_off.png";
+      imgEl.setAttribute('src',str);
+    }
+    
+  });
 
-// 모달 드래그 시작
-document.querySelector('.draggable').addEventListener('mousedown', function (e) {
-  e.preventDefault();
-  isMouseDown = true;
-  offsetX = e.offsetX;
-  offsetY = e.offsetY;
-});
 
-// 모달 드래그 종료
-document.addEventListener('mouseup', function () {
-  isMouseDown = false;
-});
-
-// 모달 드래그 중
-document.addEventListener('mousemove', function (e) {
-e.preventDefault();
-  if (isMouseDown) {
-    var modal = document.querySelector('.draggable');
-    var modalLeft = modal.offsetLeft;
-    var modalTop = modal.offsetTop;
-    modal.style.left = '100px';
-    modal.style.top = '100px';
-  }
 });
 
 
 //--------------------------
-// MAP CODE
+// MAP CODE  + SKYVIEW
 //--------------------------
 	// Leaflet 초기화
+  const laloArr = []; // 고정된 좌표값 넣기..
+  
 	var map = L.map('map').setView([37.5729, 126.9794], 15);
 
   L.tileLayer('https://tiles.osm.kr/hot/{z}/{x}/{y}.png', {
