@@ -15,7 +15,9 @@ offcanvas_btn_el.addEventListener('click', function(){
 // Nav li Click Event
 //--------------------------
 
-let menuActiveArr = []; //활성화 여부
+let menuActiveArr = []; //활성 팝업객체 저장
+let isPopupOpend = [];  //활성 팝업여부 표시
+
 const nav_menu_img_items = document.querySelectorAll('nav li>a');
 nav_menu_img_items.forEach(item =>{
     
@@ -24,6 +26,8 @@ nav_menu_img_items.forEach(item =>{
         const isOpened =  item.getAttribute('data-toggle');
         
         console.log("!!" ,isOpened);
+
+
         if(isOpened==="off"){
             
             //IMAGE CHANGE
@@ -33,24 +37,43 @@ nav_menu_img_items.forEach(item =>{
             str = str.substring(0,str.indexOf('_'))+".png";
             imgEl.setAttribute('src',str);
             
-            //ALERTPOPUP WINDOW
+            //
             const submenuUrl =  item.getAttribute('data-submenu');
             const submenuIdx = item.getAttribute('data-idx');
-            
-            var popupWidth = 1200;
-            var popupHeight = 800;
-            var popupX = (window.screen.width / 2) - (popupWidth / 2);
-            // 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
-            var popupY= (window.screen.height / 2) - (popupHeight / 2);
-            // 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
-            menuActiveArr[submenuIdx] =  window.open(submenuUrl+".html", '', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
-            console.log(submenuIdx,menuActiveArr[submenuIdx]);
-            
-            //팝업창 x버튼에 대한 이벤트 처리
+            if(submenuUrl.includes("02")||submenuUrl.includes("03")||submenuUrl.includes("04")||submenuUrl.includes("06"))
+            {
+              //팝업창 가운데로 맞추기
+              var popupWidth = 1200;
+              var popupHeight = 800;
+              var popupX = (window.screen.width / 2) - (popupWidth / 2);
+              var popupY= (window.screen.height / 2) - (popupHeight / 2);
+              //팝업창 활성화
+              menuActiveArr[submenuIdx] =  window.open(submenuUrl+".html", '', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+              isPopupOpend[submenuIdx] = true;
+              console.log(submenuIdx,menuActiveArr[submenuIdx]);
+            }
+            else if(submenuUrl.includes("01")||submenuUrl.includes("05"))
+            {
+              
+              //OFFCANVAS활성화
+              const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
+              if(!offcanvas_btn_el.classList.contains('ToRight')){
+                  //OFFCANVAS BTN Move To RIGHT
+                  offcanvas_btn_el.classList.add("ToRight");
+              }
 
-            
+              //
+              const myOffcanvas = document.querySelector('.offcanvas')
+              let bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
+              bsOffcanvas.show();
+            }
+            else if(submenuUrl.includes("05")){
 
-        }else{
+            }
+
+        }
+        else
+        {
             //IMAGE CHANGE
             item.setAttribute("data-toggle","off");
             const imgEl = item.firstElementChild;
@@ -60,9 +83,36 @@ nav_menu_img_items.forEach(item =>{
 
             //ALERTPOPUP WINDOW CLOSE
             const submenuIdx = item.getAttribute('data-idx');
-            menuActiveArr[submenuIdx].close();
-            
+            const submenuUrl =  item.getAttribute('data-submenu');
 
+            if(submenuUrl.includes("02")||submenuUrl.includes("03")||submenuUrl.includes("04")||submenuUrl.includes("06"))
+            {
+              menuActiveArr[submenuIdx].close();
+            }
+            else if(submenuUrl.includes("01")||submenuUrl.includes("05"))
+            {
+
+             
+              //팝업여부배열 false 
+              isPopupOpend[submenuIdx] = false;
+            
+                //OFFCANVAS BTN 비활성화
+                const offcanvas_btn_el = document.querySelector('.offcanvas_btn');
+                if(offcanvas_btn_el.classList.contains('ToRight')){
+                  //OFFCANVAS Move To RIGHT
+                  offcanvas_btn_el.classList.remove("ToRight");
+       
+                }
+                //OFFCANVAS 숨기기
+                const myOffcanvas = document.querySelector('.offcanvas')
+                myOffcanvas.classList.remove('show');
+                const bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas)
+                bsOffcanvas.hide();
+             
+
+            }
+           
+            
         }
 
     })
@@ -74,24 +124,24 @@ nav_menu_img_items.forEach(item =>{
 //--------------------------
  // 부모 창에서 메시지를 받는 이벤트 리스너 등록
  window.addEventListener('message', function (event) {
-  // event.data에 자식 창에서 전달한 데이터가 들어 있음
-  const receivedMessage = event.data;
-  console.log('자식 창으로부터 받은 메시지:', receivedMessage);
+    // event.data에 자식 창에서 전달한 데이터가 들어 있음
+    const receivedMessage = event.data;
+    //console.log('자식 창으로부터 받은 메시지:', receivedMessage);
   
-  //
-  const nav_menu_img_items = document.querySelectorAll('nav li>a');
-  nav_menu_img_items.forEach(item => {
-    const submenuUrl =  item.getAttribute('data-submenu');
-    if(submenuUrl.includes(receivedMessage)){
-      item.setAttribute("data-toggle","off");
-      const imgEl = item.firstElementChild;
-      let str = imgEl.getAttribute('src');
-      if(!str.includes('_off'))
-        str = str.substring(0,str.indexOf('.'))+"_off.png";
-      imgEl.setAttribute('src',str);
-    }
-    
-  });
+    //
+    const nav_menu_img_items = document.querySelectorAll('nav li>a');
+    nav_menu_img_items.forEach(item => {
+      const submenuUrl =  item.getAttribute('data-submenu');
+      if(submenuUrl.includes(receivedMessage)){
+        item.setAttribute("data-toggle","off");
+        const imgEl = item.firstElementChild;
+        let str = imgEl.getAttribute('src');
+        if(!str.includes('_off'))
+          str = str.substring(0,str.indexOf('.'))+"_off.png";
+        imgEl.setAttribute('src',str);
+      }
+      
+    });
 
 
 });
