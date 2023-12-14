@@ -162,7 +162,21 @@ body::-webkit-scrollbar{
     background-color: orange;
 }
 
+.leaflet-control-container{
+    
 
+    width : 50px;
+    ;    
+}
+.leaflet-control-zoom{
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position:absolute;
+    left:85vw;
+}
 
 
 /* FOOTER */
