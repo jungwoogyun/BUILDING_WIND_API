@@ -43,8 +43,8 @@ nav_menu_img_items.forEach(item =>{
             if(submenuUrl.includes("02")||submenuUrl.includes("03")||submenuUrl.includes("04")||submenuUrl.includes("06"))
             {
               //팝업창 가운데로 맞추기
-              var popupWidth = 1200;
-              var popupHeight = 800;
+              var popupWidth = 800;
+              var popupHeight = 600;
               var popupX = (window.screen.width / 2) - (popupWidth / 2);
               var popupY = (window.screen.height / 2) - (popupHeight / 3);
               //팝업창 활성화

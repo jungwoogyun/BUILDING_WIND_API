@@ -2,6 +2,10 @@
 
 // RIGHTCHART FUNCTION
 const RightChart = ()=>{
+
+    const windDirection = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"];
+
+
     am5.ready(function() {
 
         // Create root element
@@ -29,12 +33,28 @@ const RightChart = ()=>{
         }
 
         function generateDatas(count) {
-          cat = -1;
+
           var data = [];
-          for (var i = 0; i < count; ++i) {
-            data.push(generateData());
-          }
-          return data;
+            data.push({category : windDirection[0],value : 1});
+            data.push({category : windDirection[1],value : 1});
+            data.push({category : windDirection[2],value : 1});
+            data.push({category : windDirection[3],value : 1});
+            data.push({category : windDirection[4],value : 1});
+            data.push({category : windDirection[5],value : 1});
+            data.push({category : windDirection[6],value : 1});
+            data.push({category : windDirection[7],value : 1});
+            data.push({category : windDirection[8],value : 1});
+            data.push({category : windDirection[9],value : 1});
+            data.push({category : windDirection[10],value : 1});
+            data.push({category : windDirection[11],value :1});
+            data.push({category : windDirection[12],value : 1});
+            data.push({category : windDirection[13],value : 1});
+            data.push({category : windDirection[14],value : 1});
+            data.push({category : windDirection[15],value : 1});
+            data.push({category : windDirection[16],value : 1});
+
+
+            return data;
         }
 
         // Create chart
@@ -74,10 +94,10 @@ const RightChart = ()=>{
 
         // Create series
         // https://www.amcharts.com/docs/v5/charts/radar-chart/#Adding_series
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 1; i++) {
           var series = chart.series.push(am5radar.RadarColumnSeries.new(root, {
             stacked: true,
-            name: "Series " + i,
+            name: "풍속 : " ,
             xAxis: xAxis,
             yAxis: yAxis,
             valueYField: "value",
@@ -114,17 +134,17 @@ RightChart();
 
 // LEFT CHART
 
-const LeftChart = ()=>{
+const LeftChart = (ArrIdx,ArrVal)=>{
 
   const ctx = document.getElementById('leftChart').getContext('2d');
   var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-              labels: ['0600', '0700', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
+              labels: ArrIdx,
               fill: false,
               datasets: [{
                   label: '풍속',
-                  data: [12, 19, 3, 5, 2, 3],
+                  data: ArrVal,
                   fill: false,
                   pointStyle:'circle',
                   borderColor: '#2A76C7',
@@ -151,5 +171,5 @@ const LeftChart = ()=>{
               }
       });
 }
-LeftChart();
+
 

@@ -73,7 +73,7 @@
             <div class="chartBlock">
                 <div class="left">
 
-                    <canvas id="leftChart" ></canvas>
+                    <canvas id="leftChart" style="width:100%;"></canvas>
 
                 </div>
                 <div class="right" id="chartdivRight" >
@@ -137,37 +137,68 @@
         });
 
 
+
+
+        var currentDate = new Date();
+
+        var year = currentDate.getFullYear();
+        var month = currentDate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
+        var day = currentDate.getDate();
+
+        // 월과 일이 한 자리 수일 경우 앞에 0을 붙입니다.
+        month = month < 10 ? '0' + month : '' + month;
+        day = day < 10 ? '0' + day : '' + day;
+
+        var formattedDate = year + month + day;
+
+        console.log(formattedDate);
         //실시간 풍향
-        
-        let realtimeVEC ={};
+        let realtimeVECIdx =[];
+        let realtimeVECVal =[];
         //실시간 풍속
-        let realtimeWSD = {};
-        axios.get('/realTime')
-        .then((res)=>{
-                    console.log(res);
-                    const data = res.data;
-                    //console.log(data);
-                    data.forEach(item=>{
-                        console.log(item);
-                        itemArr = item.body.response.body.items;
-                        console.log(itemArr);
-                        itemArr.item.forEach(arr =>{
-                            if(arr.category == 'VEC'){
-                                //console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
-                                realtimeVEC[arr.baseTime] = arr.obsrValue
-                            }
-                            if(arr.category == 'WSD'){
-                                //console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
-                                realtimeWSD[arr.baseTime] = arr.obsrValue
+        let realtimeWSDIdx = ["0600", "0700", "0800", "0900", "1000","1100","1200","1300","1400","1500","1600","1700","1800","1900","2000","2100","2200","2300"];
+        let realtimeWSDVal = [];
+
+        idx=0;
+        setInterval(function(){
+
+                    axios.get(`/realTime/${formattedDate}/`+realtimeWSDIdx[idx++])
+                    .then((res)=>{
+                        console.log(res);
+                        const data = res.data;
+                        console.log(data);
+
+                        const items = data.response.body.items;
+
+                        console.log(items);
+                        items.item.forEach(item=>{
+                            if(item.category=='WSD'){
+                                    realtimeWSDVal.push(item.obsrValue);
                             }
                         });
-                    })
 
-                console.log(realtimeVEC);
-                console.log(realtimeWSD);
-              })
 
-         .catch((err)=>{ console.log(err)});
+
+                        const leftBlockEl = document.querySelector('.chartBlock .left')
+                        leftBlockEl.removeChild(leftBlockEl.children[0]);
+
+                        const newCanvas =  document.createElement('canvas');
+                        newCanvas.setAttribute('id','leftChart');
+                        leftBlockEl.appendChild(newCanvas);
+
+                        LeftChart(realtimeWSDIdx,realtimeWSDVal);
+                  })
+
+             .catch((err)=>{ console.log(err)});
+
+
+        },4000);
+
+
+
+
+
+
     </script>
 
 
