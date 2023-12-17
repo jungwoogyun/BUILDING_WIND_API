@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- RESET CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
+    
+    <!-- BS5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- GOOGLE ICON CDN -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- GOOGLE FONT CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <!-- LEAFLET CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- SWEETALERT CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+
+
+
+    <!-- COMMON CSS -->
+    <!-- <link rel="stylesheet" href="css/common.css"> -->
+    <!-- MENU06 CSS -->
+    <link rel="stylesheet" href="css/menu06.css">
+</head>
+<body>
+        
+    
+    <div class="wrapper">
+        <header>
+            <span>실시간 풍속 정보</span>
+        </header>
+        <main>
+            <section style="height:50px;margin:10px 0px;" >
+                <form action="">
+                    <select  class="form-select location" style="width:150px;" name="location">
+                        <option value="01" selected>LCT</option>
+                        <option value="02">마린시티</option>
+                        <option value="03">센텀파크</option>
+                    </select>
+
+            </section>
+            <section class="left">
+                <table class="table">
+                    <tr>
+                        <th>NO1</th>
+                        <th>NO2</th>
+                        <th>NO3</th>
+                        <th>NO4</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    
+                </table>
+
+            </section>
+           
+      
+        </main>
+        <footer>
+            <div class="chartBlock">
+                <div class="left">
+
+                    <canvas id="leftChart" ></canvas>
+
+                </div>
+                <div class="right" id="chartdivRight" >
+                   
+                    
+                </div>
+            </div>
+        </footer>
+       
+    </div>
+
+
+    <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- BS5  JS -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+   <!-- JQUERY -->
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+   <!-- LEAFLET JS -->
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+   <!-- AMCHART.JS -->
+   <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+   <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+   <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+   <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+    <!-- CHARTJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+   
+
+   <!-- MENU06 JS -->
+   <script src="js/menu06.js"></script>
+
+   <!-- JS -->
+   <script>
+    // 팝업창 종료 전달
+    window.addEventListener('unload',function(){
+        opener.postMessage("06", '*');
+    })
+    </script>
+
+
+    <script>
+        const locationSelectEl=  document.querySelector('.location');
+
+        locationSelectEl.addEventListener('change',(e)=>{
+              console.log(locationSelectEl.value);
+
+              axios.get('/realTime')
+              .then((res)=>{
+                    console.log(res);
+              })
+
+              .error((err)=>{});
+        });
+
+
+        //실시간 풍향
+        
+        let realtimeVEC ={};
+        //실시간 풍속
+        let realtimeWSD = {};
+        axios.get('/realTime')
+        .then((res)=>{
+                    console.log(res);
+                    const data = res.data;
+                    //console.log(data);
+                    data.forEach(item=>{
+                        console.log(item);
+                        itemArr = item.body.response.body.items;
+                        console.log(itemArr);
+                        itemArr.item.forEach(arr =>{
+                            if(arr.category == 'VEC'){
+                                //console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
+                                realtimeVEC[arr.baseTime] = arr.obsrValue
+                            }
+                            if(arr.category == 'WSD'){
+                                //console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
+                                realtimeWSD[arr.baseTime] = arr.obsrValue
+                            }
+                        });
+                    })
+
+                console.log(realtimeVEC);
+                console.log(realtimeWSD);
+              })
+
+         .catch((err)=>{ console.log(err)});
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>
