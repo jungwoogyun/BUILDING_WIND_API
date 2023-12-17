@@ -76,9 +76,11 @@
                     <canvas id="leftChart" style="width:100%;"></canvas>
 
                 </div>
-                <div class="right" id="chartdivRight" >
-                   
-                    
+
+                <div class="right" >
+
+                    <div  id="chartdivRight" ></div>
+
                 </div>
             </div>
         </footer>
@@ -156,43 +158,66 @@
         let realtimeVECIdx =[];
         let realtimeVECVal =[];
         //실시간 풍속
-        let realtimeWSDIdx = ["0600", "0700", "0800", "0900", "1000","1100","1200","1300","1400","1500","1600","1700","1800","1900","2000","2100","2200","2300"];
+        let realtimeWSDIdx = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"];
         let realtimeWSDVal = [];
 
         idx=0;
-        setInterval(function(){
-
-                    axios.get(`/realTime/${formattedDate}/`+realtimeWSDIdx[idx++])
+        axios.get(`/realTime`)
                     .then((res)=>{
-                        console.log(res);
-                        const data = res.data;
-                        console.log(data);
+                    console.log(res);
+                    const data = res.data;
+                    //console.log(data);
+                    data.forEach(item=>{
+                        console.log(item);
+                        itemArr = item.body.response.body.items;
+                        console.log(itemArr);
+                        itemArr.item.forEach(arr =>{
+                            if(arr.category == 'VEC'){
+                                //console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
+                                realtimeVECIdx.push(arr.baseTime);
+                                realtimeVECVal.push(arr.obsrValue);
 
-                        const items = data.response.body.items;
-
-                        console.log(items);
-                        items.item.forEach(item=>{
-                            if(item.category=='WSD'){
-                                    realtimeWSDVal.push(item.obsrValue);
+                            }
+                            if(arr.category == 'WSD'){
+                                //console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
+                                realtimeWSDVal.push(arr.obsrValue);
                             }
                         });
+                    })
+
+                    console.log(realtimeVECVal);
+                    console.log(realtimeWSDVal);
 
 
+                    //1초마다 올리기
+                    idx=0;
+                    setInterval(function(){
 
-                        const leftBlockEl = document.querySelector('.chartBlock .left')
-                        leftBlockEl.removeChild(leftBlockEl.children[0]);
+                       const chartBlockEl = document.querySelector('.chartBlock .left');
+                       chartBlockEl.removeChild(chartBlockEl.children[0]);
 
-                        const newCanvas =  document.createElement('canvas');
-                        newCanvas.setAttribute('id','leftChart');
-                        leftBlockEl.appendChild(newCanvas);
+                       const newCanvasEl = document.createElement('canvas');
+                       newCanvasEl.setAttribute('id','leftChart');
+                       chartBlockEl.appendChild(newCanvasEl);
 
-                        LeftChart(realtimeWSDIdx,realtimeWSDVal);
+                       LeftChart(realtimeVECIdx,realtimeVECVal.slice(0,idx++) );
+                        //----------------
+<!--                       const chartRightBlockEl = document.querySelector('.chartBlock .right');-->
+<!--                       chartRightBlockEl.removeChild(chartRightBlockEl.children[0]);-->
+
+<!--                       const newCanvasRightEl = document.createElement('div');-->
+<!--                       newCanvasRightEl.setAttribute('id','chartdivRight');-->
+<!--                       chartRightBlockEl.appendChild(newCanvasRightEl);-->
+<!--                       RightChart();-->
+
+                    },2000);
+
+
                   })
 
-             .catch((err)=>{ console.log(err)});
+                .catch((err)=>{ console.log(err)});
 
 
-        },4000);
 
 
 

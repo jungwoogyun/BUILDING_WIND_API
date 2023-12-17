@@ -58,6 +58,9 @@ body::-webkit-scrollbar{
     width:400px;
     height : 100%;
 }
+.wrapper>footer>.chartBlock>.right>#chartdivRight{
+    width : 100%;
+}
 
 #leftChart{
     width : 100%;

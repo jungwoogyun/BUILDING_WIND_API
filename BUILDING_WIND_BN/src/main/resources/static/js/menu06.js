@@ -35,24 +35,10 @@ const RightChart = ()=>{
         function generateDatas(count) {
 
           var data = [];
-            data.push({category : windDirection[0],value : 1});
-            data.push({category : windDirection[1],value : 1});
-            data.push({category : windDirection[2],value : 1});
-            data.push({category : windDirection[3],value : 1});
-            data.push({category : windDirection[4],value : 1});
-            data.push({category : windDirection[5],value : 1});
-            data.push({category : windDirection[6],value : 1});
-            data.push({category : windDirection[7],value : 1});
-            data.push({category : windDirection[8],value : 1});
-            data.push({category : windDirection[9],value : 1});
-            data.push({category : windDirection[10],value : 1});
-            data.push({category : windDirection[11],value :1});
-            data.push({category : windDirection[12],value : 1});
-            data.push({category : windDirection[13],value : 1});
-            data.push({category : windDirection[14],value : 1});
-            data.push({category : windDirection[15],value : 1});
-            data.push({category : windDirection[16],value : 1});
+          for(i=0;i<windDirection.length;i++){
 
+            data.push({category : windDirection[i],value : 0});
+          }
 
             return data;
         }
