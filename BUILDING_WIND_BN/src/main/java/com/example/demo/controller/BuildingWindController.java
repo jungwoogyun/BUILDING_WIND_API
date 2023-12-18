@@ -60,14 +60,21 @@ public class BuildingWindController {
         {
             time = "2300";
             day = (cal.get(Calendar.DAY_OF_MONTH)-1)+"";
-            if(Integer.parseInt(day) <10){
-                day = "0" + day;
-            }
+
         }else{
             time = (Integer.parseInt(time) -100)+"";
-        }
-        System.out.println("time : " + time);         // 포맷 적용된 현재 시간 출력
 
+        }
+        if(Integer.parseInt(day.substring(0,2)) <10){
+
+            day = "0" + day;
+        }
+
+        if(time.length()<4)
+            time = "0" + time;
+
+
+        System.out.println("TIME : " + time);
         String nowDate = year+month+day;
 
 
@@ -133,10 +140,7 @@ public class BuildingWindController {
         list.forEach(item->System.out.println(item));
 
         return list;
-
     }
-
-
 
 }
 

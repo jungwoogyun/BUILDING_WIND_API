@@ -1,10 +1,7 @@
 
 
 // RIGHTCHART FUNCTION
-const RightChart = ()=>{
-
     const windDirection = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"];
-
 
     am5.ready(function() {
 
@@ -36,10 +33,8 @@ const RightChart = ()=>{
 
           var data = [];
           for(i=0;i<windDirection.length;i++){
-
-            data.push({category : windDirection[i],value : 0});
+                data.push({category : windDirection[i],value :0});
           }
-
             return data;
         }
 
@@ -111,26 +106,26 @@ const RightChart = ()=>{
         chart.appear(1000, 100);
 
         }); // end am5.ready()
-}
-
-// RIGHT CHART 실행
-RightChart();
 
 
 
-// LEFT CHART
 
-const LeftChart = (ArrIdx,ArrVal)=>{
 
-  const ctx = document.getElementById('leftChart').getContext('2d');
-  var myChart = new Chart(ctx, {
+
+
+
+
+// LEFT CHART------------------------------------------------------
+
+
+var leftConfig = {
       type: 'line',
       data: {
-              labels: ArrIdx,
+              labels: [''],
               fill: false,
               datasets: [{
                   label: '풍속',
-                  data: ArrVal,
+                  data: [''],
                   fill: false,
                   pointStyle:'circle',
                   borderColor: '#2A76C7',
@@ -155,7 +150,14 @@ const LeftChart = (ArrIdx,ArrVal)=>{
               }
 
               }
-      });
 }
+  const ctx = document.getElementById('leftChart').getContext('2d');
+  var leftChart = new Chart(ctx,leftConfig);
 
 
+
+//const LeftChart = ()=>{
+//
+//
+//}
+//LeftChart();
