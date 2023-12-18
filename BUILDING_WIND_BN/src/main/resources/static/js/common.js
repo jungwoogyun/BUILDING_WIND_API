@@ -76,11 +76,11 @@ nav_menu_img_items.forEach(item =>{
                 //--------------------------
                 //Canvas buildingwind X BUTTON EVENT
                 //--------------------------
-                  offCanvasCancelEl = document.querySelector('.buildingwind>.header>.cancel a')
-                  offCanvasCancelEl.addEventListener('click',function(){
-                  const buildingWindEl = document.querySelector('.buildingwind');
-                  buildingWindEl.style.display="none"; 
-                })
+//                  offCanvasCancelEl = document.querySelector('.buildingwind>.header>.cancel a')
+//                  offCanvasCancelEl.addEventListener('click',function(){
+//                  const buildingWindEl = document.querySelector('.buildingwind');
+//                  buildingWindEl.style.display="none";
+//                })
 
                
 
@@ -209,7 +209,7 @@ nav_menu_img_items.forEach(item =>{
   const MARINElatlng = [35.15541, 129.1460];
   const CENTUMPARKlatlan = [35.17899, 129.1227];
   const laloArr = []; // 고정된 좌표값 넣기..
-  
+
 	var map = L.map('map').setView([35.166755,129.150615], 14); //가오비산 봉수대
 
   L.tileLayer('https://tiles.osm.kr/hot/{z}/{x}/{y}.png', {
@@ -230,8 +230,8 @@ nav_menu_img_items.forEach(item =>{
 
 	markers.forEach(function(markerInfo) {
 		var marker = L.marker(markerInfo.latlng).addTo(map);
-		
-    
+
+
     // 빨간색 마커 추가 - 아직 적용 안됨..
     var redMarker = L.marker(markerInfo.latlng, {
       icon: L.icon({

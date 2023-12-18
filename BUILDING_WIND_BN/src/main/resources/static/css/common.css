@@ -73,7 +73,7 @@ body::-webkit-scrollbar{
 }
 .wrapper>header>.top-header>div>.left:nth-child(1){
     width:50rem; 
-    font-weight:800;  
+
 }
 .wrapper>header>.top-header>div>.left:nth-child(2){
      
@@ -87,10 +87,6 @@ body::-webkit-scrollbar{
     width : 50px;
     color:white;
     margin:0px;padding:0px;
-
-
-  
-   
 }
 .wrapper>header>.top-header .right a{
     color:white;
@@ -231,11 +227,11 @@ body::-webkit-scrollbar{
     justify-content: start;
     align-items: start;
     flex-direction: column;
-    background-color:white;
-    
     padding : 10px;
     margin-bottom:20px;
-    font-weight: 800;
+    opacity : 0.8;
+    color:white;
+    padding : 10px;
 }
 .offcanvas .offcanvas-body>.wrapper .buildingwind>.header{
     width :  319px;
@@ -254,10 +250,11 @@ body::-webkit-scrollbar{
     
 }
 .offcanvas .offcanvas-body>.wrapper .buildingwind>.body{
-    height : 450px;
+    height : 300px;
     display:flex;
     justify-content: space-between;
     margin-bottom:5px;
+     padding:5px;
 }
 .offcanvas .offcanvas-body>.wrapper .buildingwind>.body>div{
     border : 1px solid ;
@@ -276,7 +273,6 @@ body::-webkit-scrollbar{
     justify-content: start;
     align-items: start;
     flex-direction: column;
-    background-color:white;
     font-size : 1.2rem;
     padding : 10px;
     margin-bottom:20px;
@@ -316,55 +312,26 @@ body::-webkit-scrollbar{
 
 /* OFFCANVAS X BUTTON */
 .offcanvas .offcanvas-body>.wrapper .buildingwind>.header>.cancel{
-    content:"X";
-    display:block;
-    position: absolute;
-    left:90%;
-    top:5px;
-    width : 25px;
-    height : 25px;
-    z-index:555;
-
+    width : 150px;
 }
 
 
 .offcanvas .offcanvas-body>.wrapper .buildingwind>.header>.cancel>a{
-    font-size:white;
-    background-color: #2A76C7;
-    border-radius: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color : white;
-    text-decoration: none;
-    font-size:1rem;
- 
+
+ text-decoration: none;
+ color:white;
+
 }
 /* OFFCANVAS X BUTTON */
 .offcanvas .offcanvas-body>.wrapper .dangerzone>.header>.cancel{
-    content:"X";
-    display:block;
-    position: absolute;
-    left:90%;
-    top:5px;
-    width : 25px;
-    height : 25px;
-    z-index:555;
+
 
 }
 .offcanvas .offcanvas-body>.wrapper .dangerzone>.header>.cancel>a{
-    font-size:white;
-    background-color: #2A76C7;
-    border-radius: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color : white;
-    text-decoration: none;
-    font-size:1rem;
-    
+
+    width : 100%;
+     text-decoration: none;
+     color:white;
 }
 
 
@@ -392,6 +359,7 @@ body::-webkit-scrollbar{
     flex-direction: column;
     position:relative;
     left:90vw;
+
 
 }
 

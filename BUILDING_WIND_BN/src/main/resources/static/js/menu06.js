@@ -8,7 +8,7 @@ var leftConfig = {
               labels: [''],
               fill: false,
               datasets: [{
-                  label: '풍속',
+                  label: '',
                   data: [''],
                   fill: false,
                   pointStyle:'circle',
@@ -24,18 +24,26 @@ var leftConfig = {
               plugins: {
               title: {
                   display: true,
-                  text: (ctx) => 'Point Style: ' + ctx.chart.data.datasets[0].pointStyle,
+                  text: '실시간 풍속변화(m/s)',
+                  align: 'start',
+                  color: '#2A76C7',
+                  },
+                  legend: {
+                   display: false, // 레전드 감추기
                   }
+
+
                },
-              elements : {
-                  line : {
-                      tension : 0
-                  }
-              }
+                  elements : {
+                      line : {
+                          tension : 0
+                      }
+                  },
 
               }
 }
 const ctx = document.getElementById('leftChart').getContext('2d');
+
 var leftChart = new Chart(ctx,leftConfig);
 
 
@@ -44,7 +52,9 @@ var leftChart = new Chart(ctx,leftConfig);
 // RIGHT CHART
 //------------------------------------------------------
   // Parse the data from an inline table using the Highcharts Data plugin
-      const rightChart =  Highcharts.chart('container', {
+
+ const rightChart =()=>{
+      Highcharts.chart('container', {
           data: {
               table: 'freq',
               startRow: 1,
@@ -83,6 +93,7 @@ var leftChart = new Chart(ctx,leftConfig);
 
           yAxis: {
               min: 0,
+              max: 3,
               endOnTick: false,
               showLastLabel: true,
               title: {
@@ -102,13 +113,20 @@ var leftChart = new Chart(ctx,leftConfig);
               series: {
                   stacking: 'normal',
                   shadow: false,
-                  groupPadding: 0,
+                  groupPadding:0,
                   pointPlacement: 'on',
                   showInLegend: false,
-              }
+              },
+              column: {
+                      tooltip: {
+                          headerFormat: '',
+                          pointFormat: '{point.y}'
+                      }
+               }
           },
 
           exporting: {
             enabled: false
           }
       });
+}

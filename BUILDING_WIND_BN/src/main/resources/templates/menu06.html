@@ -39,32 +39,16 @@
             <span>실시간 풍속 정보</span>
         </header>
         <main>
-            <section style="height:50px;margin:10px 0px;" >
-                <form action="">
-                    <select  class="form-select location" style="width:150px;" name="location">
-                        <option value="01" selected>LCT</option>
-                        <option value="02">마린시티</option>
-                        <option value="03">센텀파크</option>
-                    </select>
 
-            </section>
-            <section class="left">
-                <table class="table">
-                    <tr>
-                        <th>NO1</th>
-                        <th>NO2</th>
-                        <th>NO3</th>
-                        <th>NO4</th>
+            <section class="left" >
+                <table class="table realtimeTbl" >
+                    <tr style="background-color :#2A76C7; color : white;font-weight:600">
+                        <th>연번</th>
+                        <th>시작</th>
+                        <th>평균풍향(Deg)</th>
+                        <th>평균풍속(m/s)</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                    </tr>
-                    
                 </table>
-
             </section>
            
       
@@ -73,18 +57,16 @@
             <div class="chartBlock">
                 <div class="left">
 
-                    <canvas id="leftChart" style="width:100%;"></canvas>
+                    <canvas id="leftChart"></canvas>
 
                 </div>
 
                 <div class="right" >
-
-
                     <div id="container"></div>
                 </div>
             </div>
         </footer>
-       
+
     </div>
 
     <!--    HIGH CHART-->
@@ -159,7 +141,7 @@
                 <td class="dir">NW</td>
                 <td class="data">0</td>
             </tr>
-            <tr >
+            <tr>
                 <td class="dir">NNW</td>
                 <td class="data">0</td>
             </tr>
@@ -249,16 +231,23 @@
         let realtimeWSDVal = [];
 
         idx=0;
+        let basetime=null;
+
         axios.get(`/realTime`)
                     .then((res)=>{
                     console.log(res);
                     const data = res.data;
                     //console.log(data);
+
+
                     data.forEach(item=>{
                         console.log(item);
                         itemArr = item.body.response.body.items;
                         console.log(itemArr);
                         itemArr.item.forEach(arr =>{
+
+                            basetime = arr.baseTime;
+
                             if(arr.category == 'VEC'){
                                 //console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
                                 realtimeVECVal.push(arr.obsrValue);
@@ -288,15 +277,14 @@
                                 label:realtimeWSDIdx[idx],
                                 value:realtimeWSDVal[idx]
                             };
-
-                            leftChart.data.labels.push(newDataPoint.label);
+                            leftConfig.data.labels.push(newDataPoint.label);
                             leftChart.data.datasets[0].data.push(newDataPoint.value);
                             leftChart.update();
 
                             //----------------
                             //    right Chart
                             //----------------
-                            //풍향기호부터 구하기
+                            //풍향 기호부터 구하기
                             directionIdx =  parseInt( ( parseInt(realtimeVECVal[idx]) + 22.5 * 0.5)/22.5); //풍향문자 구하기
                             console.log("realtimeVECVal[idx] : " + realtimeVECVal[idx]);
                             console.log("directionIdx : " + directionIdx);
@@ -305,30 +293,54 @@
 
                              const leftTableTrDirEls =    document.querySelectorAll("#freq .dir");
                              leftTableTrDirEls.forEach(dir=>{
+                                if(dir.innerHTML == realtimeVECIdx[directionIdx])
+                                {
+                                    const dataEl =  dir.nextElementSibling;
+                                    dataEl.innerHTML = realtimeWSDVal[idx];
+                                }
+                                else
+                                {
+                                    const dataEl =  dir.nextElementSibling;
+                                    dataEl.innerHTML = 0;
+                                }
 
-
-                                if(dir.innerHTML == realtimeVECIdx[directionIdx]){
-                                    console.log("DIR : " + dir.innerHTML);
-                                    //const dataEl =  dir.nextSibling;
-                                    //dataEl.innerHTML = realtimeWSDVal[idx];
-
-
-                                        // 특정 행과 열의 데이터 업데이트
-                                        rightChart.update({
-                                          data: {
-                                            table: 'freq',
-                                            updateRow: directionIdx+1, // 3행 (NE 풍향)의 데이터 업데이트
-                                            updateColumn: directionIdx, // 데이터 열의 데이터 값 업데이트
-                                            newValue: realtimeWSDVal[idx], // NE 풍향의 새 값
-                                          },
-                                        });
-
-                                    }
                              });
+
+                            //----------------
+                            //RIGHT CHART
+                            //----------------
+                                const ChartBlockRightEl =  document.querySelector('.chartBlock .right');
+                                ChartBlockRightEl.removeChild(ChartBlockRightEl.children[0]);
+                                const newrightChartEl = document.createElement('div');
+                                newrightChartEl.setAttribute('id','container');
+                                ChartBlockRightEl.appendChild(newrightChartEl);
+                                rightChart();
 
 
                             //----------------
+                            //REALTIME 테이블에 추가
+                            //----------------
+                            const tblEl = document.querySelector('.realtimeTbl');
+                            const trEl = document.createElement('tr');
+                            const td1 = document.createElement('td'); td1.innerHTML=idx;
+                            const td2 = document.createElement('td'); td2.innerHTML=basetime;
+                            const td3 = document.createElement('td'); td3.innerHTML= realtimeVECVal[idx]+"/"+realtimeVECIdx[directionIdx]
+                            const td4 = document.createElement('td'); td4.innerHTML= realtimeWSDVal[idx];
+
+                            trEl.appendChild(td1);trEl.appendChild(td2);
+                            trEl.appendChild(td3);trEl.appendChild(td4);
+                            tblEl.appendChild(trEl);
+
+                            //스크롤바를 아래로 내리기
+                            const sectionLeftEl = document.querySelector('section.left');
+                            sectionLeftEl.scrollTop = container.scrollHeight;
+
+                            //----------------
+                            // IDX 증가
+                            //----------------
                             idx++;
+
+
                             if(idx>=realtimeVECVal.length){
                                 clearInterval(intervalId);
                             }

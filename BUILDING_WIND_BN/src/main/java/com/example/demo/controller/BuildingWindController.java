@@ -130,7 +130,7 @@ public class BuildingWindController {
             resp = restTemplate.exchange(url, HttpMethod.GET,null,WeatherResponse.class);
             list.add(resp);
 
-            Thread.sleep(500);
+            Thread.sleep(100);
 
             if(base_time.equals(time))
                 break;
