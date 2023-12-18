@@ -1,125 +1,6 @@
-let dataArr = [
-  {category : "N",value : 0},
-  {category : "NNE",value : 0},
-  {category : "NE",value : 0},
-  {category : "ENE",value : 0},
-  {category : "E",value : 0},
-  {category : "ESE",value : 0},
-  {category : "SE",value : 0},
-  {category : "SSE",value : 0},
-  {category : "S",value : 0},
-  {category : "SSW",value : 0},
-  {category : "SW",value :0},
-  {category : "WSW",value : 0},
-  {category : "W",value : 0},
-  {category : "WNW",value : 0},
-  {category : "NW",value : 0},
-  {category : "NNW",value : 0},
-  {category : "N",value : 0}
-];
-
-
-var chart; // 차트 객체를 전역 변수로 선언
-
-
-// RIGHTCHART FUNCTION
-am5.ready(function() {
-
-        // Create root element
-        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-        var root = am5.Root.new("chartdivRight");
-
-        // Set themes
-        // https://www.amcharts.com/docs/v5/concepts/themes/
-        root.setThemes([
-          am5themes_Animated.new(root)
-        ]);
-
-        // Generate and set data
-        // https://www.amcharts.com/docs/v5/charts/radar-chart/#Setting_data
-
-
-        // Create chart
-        // https://www.amcharts.com/docs/v5/charts/radar-chart/
-        chart = root.container.children.push(am5radar.RadarChart.new(root, {
-          panX: false,
-          panY: false,
-          wheelX: "panX",
-          wheelY: "zoomX",
-
-        }));
-
-        // Add cursor
-        // https://www.amcharts.com/docs/v5/charts/radar-chart/#Cursor
-        var cursor = chart.set("cursor", am5radar.RadarCursor.new(root, {
-          behavior: "zoomX"
-        }));
-
-        cursor.lineY.set("visible", false);
-
-        // Create axes and their renderers
-        // https://www.amcharts.com/docs/v5/charts/radar-chart/#Adding_axes
-        var xRenderer = am5radar.AxisRendererCircular.new(root, {});
-        xRenderer.labels.template.setAll({
-          radius: 30,
-
-        });
-
-        var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-          maxDeviation: 0,
-          categoryField: "category",
-          renderer: xRenderer,
-          tooltip: am5.Tooltip.new(root, {}),
-
-        }));
-
-
-
-        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-          renderer: am5radar.AxisRendererRadial.new(root, {}),
-          min : 0,
-          baseValue : 0
-        }));
-
-        // Create series
-        // https://www.amcharts.com/docs/v5/charts/radar-chart/#Adding_series
-        for (var i = 0; i < 1; i++) {
-          var series = chart.series.push(am5radar.RadarColumnSeries.new(root, {
-            stacked: true,
-            name: "풍속",
-            xAxis: xAxis,
-            yAxis: yAxis,
-            valueYField: "value",
-            categoryXField: "category"
-          }));
-
-          series.columns.template.setAll({
-            tooltipText: "{name}: {valueY}"
-          });
-
-          series.data.setAll(dataArr);
-
-          series.appear(1000);
-        }
-
-        // Add scrollbars
-
-
-
-        xAxis.data.setAll(dataArr);
-
-        // Animate chart
-        // https://www.amcharts.com/docs/v5/concepts/animations/#Initial_animation
-        chart.appear(1000, 100);
-
-
- })
-
-
-
-
-// LEFT CHART------------------------------------------------------
-
+//------------------------------------------------------
+// LEFT CHART
+//------------------------------------------------------
 
 var leftConfig = {
       type: 'line',
@@ -159,8 +40,75 @@ var leftChart = new Chart(ctx,leftConfig);
 
 
 
-//const LeftChart = ()=>{
-//
-//
-//}
-//LeftChart();
+//------------------------------------------------------
+// RIGHT CHART
+//------------------------------------------------------
+  // Parse the data from an inline table using the Highcharts Data plugin
+      const rightChart =  Highcharts.chart('container', {
+          data: {
+              table: 'freq',
+              startRow: 1,
+              endRow: 17,
+              endColumn: 7
+          },
+
+          chart: {
+              polar: true,
+              type: 'column'
+          },
+
+           title: {
+               text: null,
+           },
+
+          // subtitle: {
+          //     text: 'title',
+          //     align: 'left'
+          // },
+
+          pane: {
+              size: '85%'
+          },
+
+          // legend: {
+          //     align: 'right',
+          //     verticalAlign: 'top',
+          //     y: 100,
+          //     layout: 'vertical'
+          // },
+
+          xAxis: {
+              tickmarkPlacement: 'on'
+          },
+
+          yAxis: {
+              min: 0,
+              endOnTick: false,
+              showLastLabel: true,
+              title: {
+                  text: '풍속 (m/s)'
+              },
+              labels: {
+                  format: '{value} m/s'
+              },
+              reversedStacks: false
+          },
+
+          tooltip: {
+              valueSuffix: 'm/s'
+          },
+
+          plotOptions: {
+              series: {
+                  stacking: 'normal',
+                  shadow: false,
+                  groupPadding: 0,
+                  pointPlacement: 'on',
+                  showInLegend: false,
+              }
+          },
+
+          exporting: {
+            enabled: false
+          }
+      });
