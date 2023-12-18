@@ -79,7 +79,7 @@
 
                 <div class="right" >
 
-                    <div  id="chartdivRight" ></div>
+                    <div   id="chartdivRight" style="height:100%;width:100%;"></div>
 
                 </div>
             </div>
@@ -155,10 +155,11 @@
 
         console.log(formattedDate);
         //실시간 풍향
-        let realtimeVECIdx =[];
+        let realtimeVECIdx =["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
         let realtimeVECVal =[];
+
         //실시간 풍속
-        let realtimeWSDIdx = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"];
+        let realtimeWSDIdx = [];
         let realtimeWSDVal = [];
 
         idx=0;
@@ -174,18 +175,18 @@
                         itemArr.item.forEach(arr =>{
                             if(arr.category == 'VEC'){
                                 //console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
-                                realtimeVECIdx.push(arr.baseTime);
                                 realtimeVECVal.push(arr.obsrValue);
 
                             }
                             if(arr.category == 'WSD'){
-                                //console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
+                                console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
+                                realtimeWSDIdx.push(arr.baseTime);
                                 realtimeWSDVal.push(arr.obsrValue);
                             }
                         });
                     })
 
-                    console.log(realtimeVECVal);
+                    console.log(realtimeWSDIdx);
                     console.log(realtimeWSDVal);
 
 
@@ -194,32 +195,54 @@
                     var intervalId = setInterval(function(){
 
 
-
+                            //----------------
+                            //    left Chart
+                            //----------------
                             var newDataPoint = {
-                                label:realtimeVECIdx[idx],
-                                value:realtimeVECVal[idx]
+                                label:realtimeWSDIdx[idx],
+                                value:realtimeWSDVal[idx]
                             };
 
                             leftChart.data.labels.push(newDataPoint.label);
                             leftChart.data.datasets[0].data.push(newDataPoint.value);
                             leftChart.update();
 
-                       //----------------
-<!--                       const chartRightBlockEl = document.querySelector('.chartBlock .right');-->
-<!--                       chartRightBlockEl.removeChild(chartRightBlockEl.children[0]);-->
+                            //----------------
+                            //    right Chart
+                            //----------------
+                            //풍향기호부터 구하기
+                            directionIdx =  parseInt( ( parseInt(realtimeVECVal[idx]) + 22.5 * 0.5)/22.5); //풍향문자 구하기
+                            console.log("realtimeVECVal[idx] : " + realtimeVECVal[idx]);
+                            console.log("directionIdx : " + directionIdx);
+                            console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
+                            chart.series.each(function (series) {
 
-<!--                       const newCanvasRightEl = document.createElement('div');-->
-<!--                       newCanvasRightEl.setAttribute('id','chartdivRight');-->
-<!--                       newCanvasRightEl.setAttribute('style','width:100%;height:100%;');-->
 
-<!--                       chartRightBlockEl.appendChild(newCanvasRightEl);-->
-<!--                       RightChart(realtimeWSDVal.slice(0,idx++) );-->
 
+                                  dataArr.forEach(
+                                        item =>{
+
+                                        if(realtimeVECIdx[directionIdx] == item.category+""){
+                                            console.log("category : " + item.category);
+                                            item.value=realtimeWSDVal[idx];
+                                        }else{
+                                            item.value=0;
+                                        }
+                                  })
+                                  chart.series.each(series=>{
+                                    series.data.setAll(dataArr);
+                                    series.appear(1000);
+                                  })
+
+//                                  chart.appear(1000, 100);
+                                });
+
+                            //----------------
                             idx++;
-
                             if(idx>=realtimeVECVal.length){
                                 clearInterval(intervalId);
                             }
+
                     },2000);
                   })
 

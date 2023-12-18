@@ -35,7 +35,7 @@ public class BuildingWindController {
     @GetMapping(value = "/realTime" ,  produces= MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<ResponseEntity<WeatherResponse>> realTime(
 
-    ) throws ParseException, java.text.ParseException {
+    ) throws ParseException, java.text.ParseException, InterruptedException {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -76,13 +76,11 @@ public class BuildingWindController {
 
         System.out.println("TIME : " + time);
         String nowDate = year+month+day;
-
+        System.out.println("NOWDATE :" + nowDate);
 
         //0000시이면 이전 날짜로 처리
 
 
-
-        String addr;
         String pageNo ="1";
         String numOfRows = "10";
         String dataType = "JSON";
@@ -132,6 +130,7 @@ public class BuildingWindController {
             resp = restTemplate.exchange(url, HttpMethod.GET,null,WeatherResponse.class);
             list.add(resp);
 
+            Thread.sleep(500);
 
             if(base_time.equals(time))
                 break;
