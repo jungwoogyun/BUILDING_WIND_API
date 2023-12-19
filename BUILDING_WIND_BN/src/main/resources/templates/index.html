@@ -22,6 +22,7 @@
     <!-- LEAFLET CDN -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
+
     <!-- SWEETALERT CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 
@@ -260,18 +261,35 @@
 
                     </div>
 
+                    <div class="header" >
+                        <div>범례 (m/s)</div>
+                        <div class="cancel"><a href="javascript:void(0)">상세정보</a></div>
+                    </div>
+                    <div class="body" style="height:250px;">
+                        <div class="left">
+
+                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
+                               
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
                 </div>
 
                 <div class="dangerzone offcanvas--hide"   style="display:none;">
-                       
-                    <div class="header" >
-                        <div class="cancel"><a href="javascript:void(0)">X</a></div>
-                        <h4>DANGER ZONE</h4>
-                    </div>
 
-                    <div class="body">
-                        <div class="left"></div>
-                        <div class="right"></div>
+                        <div class="header" >
+                            <div class="cancel"><a href="javascript:void(0)">X</a></div>
+                            <h4>DANGER ZONE</h4>
+                        </div>
+
+                        <div class="body">
+                            <div class="left"></div>
+                            <div class="right"></div>
                     </div>
                     <div class="footer">
                         gg
@@ -292,7 +310,8 @@
 
 
 
-    <!-- --------------------------------------------
+    <!-- ------------------------
+    --------------------
     BUildingWind Danger Page Fixed
    -------------------------------------------- -->
     <div class="buildingDangerFixedBlock" style="position:fixed;width:400px;height:800px;left:70%;top:250px;background-color:white;z-index:700">
@@ -315,6 +334,7 @@
 
     <!-- LEAFLET JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 
     <!-- SWEETALERT JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>

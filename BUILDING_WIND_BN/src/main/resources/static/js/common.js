@@ -205,26 +205,33 @@ nav_menu_img_items.forEach(item =>{
 //--------------------------
 	// Leaflet 초기화
 
-  const LCTlatlng = [35.16073, 129.1688];
-  const MARINElatlng = [35.15541, 129.1460];
-  const CENTUMPARKlatlan = [35.17899, 129.1227];
-  const laloArr = []; // 고정된 좌표값 넣기..
+const LCTlatlng = [35.16073, 129.1688];
+const MARINElatlng = [35.15541, 129.1460];
+const CENTUMPARKlatlan = [35.17899, 129.1227];
 
-	var map = L.map('map').setView([35.166755,129.150615], 14); //가오비산 봉수대
 
-  L.tileLayer('https://tiles.osm.kr/hot/{z}/{x}/{y}.png', {
+
+
+//  /var map = L.map('map').setView([35.166755,129.150615], 14); //가오비산 봉수대
+
+var map = L.map('map').setView([35.16073, 129.1688], 15); //LCT ,14기본값
+//-----------
+//기본지도
+//-----------
+L.tileLayer('https://tiles.osm.kr/hot/{z}/{x}/{y}.png', {
 		maxZoom: 19,
 		attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>'
-	}).addTo(map);
+}).addTo(map);
+//-----------
+//위성지도
+//-----------
 
 
-
-
-  	// 다중 마커를 추가하고 각 마커에 팝업 설정
-	var markers = [
+// 다중 마커를 추가하고 각 마커에 팝업 설정
+var markers = [
 		{latlng: LCTlatlng, popupContent: 'LCT'},
 		{latlng: MARINElatlng, popupContent: '마린시티'},
-    {latlng: CENTUMPARKlatlan, popupContent: '센텀파크'},
+        {latlng: CENTUMPARKlatlan, popupContent: '센텀파크'},
 	];
 
 
@@ -232,7 +239,7 @@ nav_menu_img_items.forEach(item =>{
 		var marker = L.marker(markerInfo.latlng).addTo(map);
 
 
-    // 빨간색 마커 추가 - 아직 적용 안됨..
+    // 빨간색 마커 추가
     var redMarker = L.marker(markerInfo.latlng, {
       icon: L.icon({
           iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
@@ -250,13 +257,22 @@ nav_menu_img_items.forEach(item =>{
 
 });
 
+// 포인터를 위한 사용자 지정 아이콘 정의
+var pointerIcon = L.icon({
+  iconUrl: '/images/pointer.png',
+  iconSize: [8, 8], // 아이콘 크기 설정
+  iconAnchor: [16, 32], // 아이콘의 앵커 지점 설정
+  popupAnchor: [0, -32] // 팝업의 앵커 지점 설정
+});
 
-// 클릭한 위치의 정보 업데이트 함수(아직구현 x)
+
+
+// //클릭한 위치의 정보 업데이트 함수(아직구현 x)
 // function updateInfoPanel(latlng) {
 // 		// 클릭한 위치의 위도와 경도 업데이트
 // 		document.getElementById('latitude').textContent = latlng.lat.toFixed(6);
 // 		document.getElementById('longitude').textContent = latlng.lng.toFixed(6);
-
+//
 // 		// 클릭한 위치의 주소를 지오코딩을 통해 가져오기(나중에)
 // 		fetch('https://api.opencagedata.com/geocode/v1/json?q=' + latlng.lat + '+' + latlng.lng + '&key=YOUR_OPENCAGE_API_KEY')
 // 			.then(response => response.json())
@@ -270,9 +286,52 @@ nav_menu_img_items.forEach(item =>{
 // 			});
 // 	}
 
-	// // 지도 클릭 이벤트 리스너
-	// map.on('click', function (e) {
-	// 	// 클릭한 지점의 정보를 사용하여 정보 패널 내용을 업데이트
-  //   alert("A");
-	// 	updateInfoPanel(e.latlng);
-	// });
+
+
+//LCT 영역표시(GREEN)
+var polygonPoints = [];
+const createLCTSection =() =>{
+
+     // 경계를 이용해 다각형을 만들고 원하는 색상을 설정합니다.
+     var polygon = L.polygon(polygonPoints, { color: '', fillColor: 'green', fillOpacity: 0.3 }).addTo(map);
+
+     // 다른 영역에 대해서도 동일한 방식으로 처리할 수 있습니다.
+     var polygon2Points = [];
+     var polygon2 = L.polygon(polygon2Points, { color: 'blue', fillColor: 'blue', fillOpacity: 0.5 }).addTo(map);
+
+     // 또 다른 영역에 대해서도 동일한 방식으로 처리할 수 있습니다.
+     var polygon3Points = [// 다른 영역의 좌표
+     ];
+     var polygon3 = L.polygon(polygon3Points, { color: 'green', fillColor: 'red', fillOpacity: 0.5 }).addTo(map);
+     //영역 고정
+    //map.setView([35.16061302338314 ,  129.1687917709351],15);
+
+}
+
+
+
+
+//------------------------------
+// 지도 클릭 이벤트 리스너
+//------------------------------
+map.on('click', function (e) {
+     console.log(e.target);
+        //클릭한 지점의 위도 경도 표시
+        console.log('lat :' ,e.latlng.lat,'lan : ',e.latlng.lng);
+        polygonPoints.unshift([e.latlng.lat,e.latlng.lng]);
+        console.log(polygonPoints);
+
+        // 사용자 지정 아이콘을 사용하여 사용자 지정 마커 생성
+        var customMarker = L.marker(e.latlng, { icon: pointerIcon }).addTo(map);
+
+
+
+        //좌표점이 10개이상 채워지면 지도에 영역표시하기..
+        if(polygonPoints.length>5){
+            createLCTSection();
+            polygonPoints = [];
+        }
+
+// 	/updateInfoPanel(e.latlng);
+});
+

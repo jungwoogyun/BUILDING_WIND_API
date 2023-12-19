@@ -254,7 +254,7 @@ body::-webkit-scrollbar{
     display:flex;
     justify-content: space-between;
     margin-bottom:5px;
-     padding:5px;
+
 }
 .offcanvas .offcanvas-body>.wrapper .buildingwind>.body>div{
     border : 1px solid ;
