@@ -1,0 +1,34 @@
+.wrapper{
+    padding : 5px;
+}
+.wrapper>header{
+    height : 50px;
+    line-height : 50px;
+    background-color: #2A76C7;
+    color : white;
+    font-size:2rem;
+}
+.wrapper>header>.top-header{    
+  }
+.wrapper>header>nav{}
+
+
+.wrapper>main{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;;
+}
+.wrapper>main > section{
+  
+   
+}
+.wrapper>main > section.left{
+    border : 1px solid gray;
+    width :500px;
+    height : 90vh;
+}
+.wrapper>main > section.right{
+    border : 1px solid gray;
+    width :100%;
+    height : 90vh;
+}

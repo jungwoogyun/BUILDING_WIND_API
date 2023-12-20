@@ -241,26 +241,28 @@
 
 
                     data.forEach(item=>{
-                        console.log('item ',item);
+                        console.log(item);
+                        itemArr = item.body.response.body.items;
+                        console.log(itemArr);
+                        itemArr.item.forEach(arr =>{
 
+                            basetime = arr.baseTime;
 
-                            basetime = item.baseTime;
+                            if(arr.category == 'VEC'){
+                                //console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
+                                realtimeVECVal.push(arr.obsrValue);
 
-                            if(item.category == 'VEC'){
-                                //console.log(item.baseTime+":"+item.category+":"+item.obsrValue);
-                                realtimeVECVal.push(item.obsrValue);
                             }
-                            if(item.category == 'WSD'){
-                                console.log(item.baseTime+":"+item.category+":"+item.obsrValue);
-                                realtimeWSDIdx.push(item.baseTime);
-                                realtimeWSDVal.push(item.obsrValue);
+                            if(arr.category == 'WSD'){
+                                console.log(arr.baseTime+":"+arr.category+":"+arr.obsrValue);
+                                realtimeWSDIdx.push(arr.baseTime);
+                                realtimeWSDVal.push(arr.obsrValue);
                             }
-
+                        });
                     })
 
                     console.log(realtimeWSDIdx);
                     console.log(realtimeWSDVal);
-                    console.log(realtimeVECVal);
 
 
                     //1초마다 올리기
