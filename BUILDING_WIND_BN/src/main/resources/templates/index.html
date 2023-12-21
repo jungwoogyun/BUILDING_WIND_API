@@ -1,346 +1,993 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Document</title>
-    
-    <!-- RESET CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
-    
-    <!-- BS5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <head>
+        <meta charset="UTF-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Document</title>
 
-    <!-- GOOGLE ICON CDN -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-    <!-- GOOGLE FONT CDN -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-
-    <!-- LEAFLET CDN -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+ 
 
 
-    <!-- SWEETALERT CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+        <!-- RESET CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
+            rel="stylesheet">
+
+        <!-- BS5 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+
+        <!-- GOOGLE ICON CDN -->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+
+        <!-- GOOGLE FONT CDN -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin="crossorigin">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet">
+
+        <!-- LEAFLET CDN -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+   
 
 
+        <!-- COMMON CSS -->
+        <link rel="stylesheet" href="css/common.css">
 
-    <!-- COMMON CSS -->
-    <link rel="stylesheet" href="css/common.css">
+        <!-- mobile -->
+        <link rel="stylesheet" href="css/mobile.css" media="all and (max-width:450px)">
 
-</head>
-<body>
-        
-    
-    <div class="wrapper ">
-        <header>
-            <div class="top-header">
-                
-                <div>
-                    <div class="left">
-                        <div>
-                            <span>빌딩풍 위험도 분석 및 예방·대응 시스템</span>
+    </head>
+    <body>
+
+        <div class="wrapper ">
+            <header>
+                <div class="top-header">
+
+                    <div>
+                        <div class="left">
+                            <div>
+                                <span>빌딩풍 위험도 분석 및 예방·대응 시스템</span>
+                            </div>
+                            <div>
+                                <form action="">
+                                    <select class="form-select" style="width:150px;">
+                                        <option value="" selected="selected">LCT</option>
+                                        <option value="" selected="selected">마린시티</option>
+                                        <option value="" selected="selected">센텀파크</option>
+                                    </select>
+                                </form>
+
+                            </div>
                         </div>
-                        <div>
-                            <form action="">
-                                <select  class="form-select" style="width:150px;">
-                                    <option value="" selected>LCT</option>
-                                    <option value="" selected>마린시티</option>
-                                    <option value="" selected>센텀파크</option>
-                                </select>
-                            </form>
-                            
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div>
-                            <a href="javascript:void(0)">
-                                <span class="material-symbols-outlined">logout</span>
-                            </a>
+                        <div class="right">
+                            <div>
+                                <a href="javascript:void(0)">
+                                    <span class="material-symbols-outlined">logout</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <nav class="navbar navbar-expand-lg navbar-light">
+                <nav class="navbar navbar-expand-lg navbar-light">
                     <div>
                         <ul class="navbar-nav">
                             <li class="nav-item ">
-                                <a class="nav-link  text-white" href="javascript:void(0)" data-toggle="off"  data-submenu="menu01" data-idx="1">
-                                    <img src="images/icon1_off.png"  alt=""  />
+                                <a
+                                    class="nav-link  text-white"
+                                    href="javascript:void(0)"
+                                    data-toggle="off"
+                                    data-submenu="menu01"
+                                    data-idx="1">
+                                    <!-- <img src="images/icon1_off.png" alt="" /> -->
                                     <div class="title">빌딩풍</div>
                                 </a>
                             </li>
                             <li class="nav-item  ms-3">
-                                <a class="nav-link  text-white" href="javascript:void(0)"  data-toggle="off" data-submenu="menu06"  data-idx="6">
-                                    <img src="images/test2_off.png"  alt="" />
-                                    <div class="title">실시간 풍속정보</div>
+                                <a
+                                    class="nav-link  text-white"
+                                    href="javascript:void(0)"
+                                    data-toggle="off"
+                                    data-submenu="menu06"
+                                    data-idx="6">
+                                    <!-- <img src="images/test2_off.png" alt="" /> -->
+
+                                    <div class="title" style="width:200px;">실시간 <br> 풍속정보</div>
                                 </a>
                             </li>
                             <li class="nav-item  ms-3">
-                                <a class="nav-link  text-white" href="javascript:void(0)"  data-toggle="off" data-submenu="menu05"  data-idx="5">
-                                    <img src="images/icon22_off.png"  alt="" />
-                                    <div class="title">빌딩품 위험지도</div>
+                                <a
+                                    class="nav-link  text-white"
+                                    href="javascript:void(0)"
+                                    data-toggle="off"
+                                    data-submenu="menu05"
+                                    data-idx="5">
+                                    <!-- <img src="images/icon22_off.png" alt="" /> -->
+                                    <div class="title">빌딩풍 <br>위험지도</div>
                                 </a>
                             </li>
 
                             <li class="nav-item  ms-3">
-                                <a class="nav-link  text-white" href="javascript:void(0)" data-toggle="off" data-submenu="menu02"  data-idx="2">
-                                    <img src="images/icon3_off.png"  alt="" />
+                                <a
+                                    class="nav-link  text-white"
+                                    href="javascript:void(0)"
+                                    data-toggle="off"
+                                    data-submenu="menu02"
+                                    data-idx="2">
+                                    <!-- <img src="images/icon3_off.png" alt="" /> -->
                                     <div class="title">행동요령</div>
                                 </a>
                             </li>
                             <li class="nav-item  ms-3">
-                                <a class="nav-link  text-white" href="javascript:void(0)"  data-toggle="off" data-submenu="menu03"  data-idx="3">
-                                    <img src="images/icon4_off.png"  alt="" />
+                                <a
+                                    class="nav-link  text-white"
+                                    href="https://safecity.busan.go.kr/#/"
+                                    target="_blank"
+                                    data-toggle="off"
+                                    data-submenu="menu03"
+                                    data-idx="3">
+                                    <!-- <img src="images/icon4_off.png" alt="" /> -->
                                     <div class="title">부산시 침수통합관리 시스템</div>
                                 </a>
                             </li>
 
-<!--                            -->
-<!--                            <li class="nav-item  ms-3">-->
-<!--                                <a class="nav-link  text-white" href="javascript:void(0)"  data-toggle="off"  data-submenu="menu04"  data-idx="4">-->
-<!--                                    <img src="images/icon12_off.png"  alt="" />-->
-<!--                                    <div class="title">XXXX</div>-->
-<!--                                </a>-->
-<!--                            </li>-->
-
+                            <!-- -->
+                            <!-- <li class="nav-item ms-3">-->
+                            <!-- <a class="nav-link text-white" href="javascript:void(0)" data-toggle="off"
+                            data-submenu="menu04" data-idx="4">-->
+                            <!-- <img src="images/icon12_off.png" alt="" />-->
+                            <!-- <div class="title">XXXX</div>-->
+                            <!-- </a>-->
+                            <!-- </li>-->
 
                         </ul>
                     </div>
                 </nav>
 
-        </header>
-        
-        
-        <main>
-            <section>
-                <div id="map" ></div>
-            </section>
-        </main>
+            </header>
+
+            <style></style>
+            <main>
+                <section class="section01">
+                    <!-- 빌딩풍 -->
+
+                    <video controls="controls" autoplay="autoplay" muted="muted" >
+                        <source src="video/section01_bg.mp4" type="video/mp4">
+                    </video>
+
+                    <div class="hrtg">
+                        빌딩풍
+                    </div>
+                    <div class="youtubeBlk" >
+                        <div class="wrapper" >
+                            <div class="videoblock">
+                                <div><a href="javascript:void(0)" class="main-banner-btn" data-bs-toggle="modal" data-bs-target="#exampleModal2"><span class="material-symbols-outlined">play_arrow</span></a></div>
+                                <div><a href="javascript:void(0)" class="main-banner-btn" data-bs-toggle="modal" data-bs-target="#exampleModal4"><span class="material-symbols-outlined">play_arrow</span></a></div>
+                                <div><a href="javascript:void(0)" class="main-banner-btn" data-bs-toggle="modal" data-bs-target="#exampleModal3"><span class="material-symbols-outlined naver">play_arrow</span></a></div>
+                                <div><a href="javascript:void(0)" class="main-banner-btn" data-bs-toggle="modal" data-bs-target="#exampleModal1"><span class="material-symbols-outlined">play_arrow</span></a>
+                            </div>
+                        </div>                      
+                    </div>
+                </section>
+
+                <section class="section06">
+                    <!-- -->
+                    <div class="left" >
+                        <img src="images/fixed_img01.png" />
+                    </div>
+                    <div class="right">
+                        <div  class="tbl_block"  >
+                            <table class="table realtimeTbl" >
+                                <thead>
+                                <tr style="background-color :#2A76C7; color : white;font-weight:600">
+                                    <th >연번</th>
+                                    <th >시간</th>
+                                    <th >평균풍향(Deg)</th>
+                                    <th >평균풍속(m/s)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                        <div class="chartBlock" >
+                            <div class="left" >
+                                <canvas id="leftChart" ></canvas>
+                            </div>
+            
+                            <div class="right" style="">
+                                <div id="container" ></div>
+                            </div>
+                        </div>
+                    </div>   
+
+                </section>
 
 
+                <section class="section03 ">
+                    <!-- 빌딩풍 위험지도 -->
+                    <div id="map"></div>
+                </section>
+            </main>
 
-        <footer>
-           
-        </footer>
+            <footer></footer>
 
-    </div>
-
-    <!-- --------------------------------------------
-       OFFCANVS 
-    -------------------------------------------- --> 
-    <a class="offcanvas_btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-      <img src="images/slide.png" />
-    </a>
-      <div class="offcanvas offcanvas-start" data-bs-backdrop="false" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header" >
-          <div class="offcanvas-title" id="offcanvasExampleLabel">제목</div>
-          <button type="button offcanvas_close_btn" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-          <div class="wrapper">
-             
+
+        <!-- MODALS -->
+        <!-- Top-header site Menu Modal -->
+<style>
+
+</style>
+
+<!--  -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullsize" >
+      <div class="modal-content">
+        <div class="modal-header"> 
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
             <div>
-                <div class="buildingwind "  style="display:none;">
-                       
-                        <div class="header" >
-                            <div>[엘시티]</div>
-                            <div class="cancel"><a href="javascript:void(0)">상세정보</a></div>
-                        </div>
-                        <div class="body">
-                            <div class="left">
-
-                                <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                    <input type="checkbox" name=""  id="lct-location01"  class="form-check-input" style="width:20px;" />&nbsp;
-                                    <label for="lct-location01" class="form-check-label">북풍 (N)</label>
-                                </div>
-                                <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                    <input type="checkbox" name=""  id="lct-location02"  class="form-check-input" style="width:20px;" />&nbsp;
-                                    <label for="lct-location02" class="form-check-label">북동풍 (NE)</label>
-                                </div>
-                                <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                    <input type="checkbox" name=""  id="lct-location03"  class="form-check-input" style="width:20px;" />&nbsp;
-                                    <label for="lct-location03" class="form-check-label">동풍 (E)</label>
-                                </div>
-                                <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                    <input type="checkbox" name=""  id="lct-location04"  class="form-check-input" style="width:20px;" />&nbsp;
-                                    <label for="lct-location04" class="form-check-label">남풍 (S)</label>
-                                </div>
-                                <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                    <input type="checkbox" name=""  id="lct-location05"  class="form-check-input" style="width:20px;" />&nbsp;
-                                    <label for="lct-location05" class="form-check-label">남서풍 (SW)</label>
-                                </div>
-                                <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                    <input type="checkbox" name=""  id="lct-location06"  class="form-check-input" style="width:20px;" />&nbsp;
-                                    <label for="lct-location06" class="form-check-label">서풍 (W)</label>
-                                </div>
-                                <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                    <input type="checkbox" name=""  id="lct-location07"  class="form-check-input" style="width:20px;" />&nbsp;
-                                    <label for="lct-location07" class="form-check-label">북서풍 (NW)</label>
-                                </div>
-                            </div>
-
-                        </div>
-                    <div class="header" >
-                        <div>[마린시티]</div>
-                        <div class="cancel"><a href="javascript:void(0)">상세정보</a></div>
-                    </div>
-                    <div class="body">
-                        <div class="left">
-
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="marin-location01"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="marin-location01" class="form-check-label">북풍 (N)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="marin-location02"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="marin-location02" class="form-check-label">북동풍 (NE)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="marin-location03"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="marin-location03" class="form-check-label">동풍 (E)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="marin-location04"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="marin-location04" class="form-check-label">남풍 (S)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="marin-location05"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="marin-location05" class="form-check-label">남서풍 (SW)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="marin-location06"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="marin-location06" class="form-check-label">서풍 (W)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="marin-location07"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="marin-location07" class="form-check-label">북서풍 (NW)</label>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="header" >
-                        <div>[센텀파크]</div>
-                        <div class="cancel"><a href="javascript:void(0)">상세정보</a></div>
-                    </div>
-                    <div class="body">
-                        <div class="left">
-
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="centum-location01"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="centum-location01" class="form-check-label">북풍 (N)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="centum-location02"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="centum-location02" class="form-check-label">북동풍 (NE)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="centum-location03"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="centum-location03" class="form-check-label">동풍 (E)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="centum-location04"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="centum-location04" class="form-check-label">남풍 (S)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="centum-location05"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="centum-location05" class="form-check-label">남서풍 (SW)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="centum-location06"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="centum-location06" class="form-check-label">서풍 (W)</label>
-                            </div>
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                                <input type="checkbox" name=""  id="centum-location07"  class="form-check-input" style="width:20px;" />&nbsp;
-                                <label for="centum-location07" class="form-check-label">북서풍 (NW)</label>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="header" >
-                        <div>범례 (m/s)</div>
-                        <div class="cancel"><a href="javascript:void(0)">상세정보</a></div>
-                    </div>
-                    <div class="body" style="height:250px;">
-                        <div class="left">
-
-                            <div  style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;">
-                               
-                            </div>
-
-                        </div>
-
-                    </div>
+                <div><h3>TOP-MENU</h3></div>
+            </div>
+            <div>
+                <div><h3>TOP-MENU</h3></div>
+            </div>
+            <div>
+                <div><h3>TOP-MENU</h3></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>
 
 
+  <!-- Main banner Video Modal -->
 
+        <!-- 모달 1 퍼가기 금지..다른방법으로 띄우기-->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-xl modal-fullsize" >
+            <div class="modal-content">
+                <div class="modal-header"> 
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+                    <iframe src="https://www.youtube.com/embed/lgfJG3IcMpg?si=QlID5GhJvAe7eyDW&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                
+                <style>
+                    #exampleModal2 .modal-footer{
+                        height:50px;
+                        border-top:1px solid lightgray;
+                    }
+                </style>
+                <div class="modal-footer">
+                
+                </div>
+            </div>
+            </div>
+        </div>
 
-                <div class="dangerzone offcanvas--hide"   style="display:none;">
+        <!--  모달 2 ok-->
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-xl modal-fullsize" >
+            <div class="modal-content">
+                <div class="modal-header"> 
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe  src="https://www.youtube.com/embed/20__7wr_nwQ?si=zbzU5iGbnRbm5usU&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                
+                <style>
+                    #exampleModal2 .modal-footer{
+                        height:50px;
+                        border-top:1px solid lightgray;
+                    }
+                </style>
+                <div class="modal-footer">
+                
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--  모달 3 네이버전체창이 나옴.. 동영상만 따로..-->
+        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-xl modal-fullsize" >
+            <div class="modal-content">
+                <div class="modal-header"> 
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe  src="https://tv.naver.com/v/15691656?mute=true" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen mute></iframe>    
+                </div>
+ 
+            </div>
+            </div>
+        </div>
+        <!--  모달 4-->
+        <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-xl modal-fullsize" >
+            <div class="modal-content">
+                <div class="modal-header"> 
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="naverTvIframe" src="https://www.youtube.com/embed/d3fh7ADBKT4?si=Kxuxd_3T08by-p9L&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                
+                </div>
+                
+                <style>
+                    #exampleModal2 .modal-footer{
+                        height:50px;
+                        border-top:1px solid lightgray;
+                    }
+                </style>
+                <div class="modal-footer">
+                
+                </div>
+            </div>
+            </div>
+        </div>        
 
-                        <div class="header" >
-                            <div class="cancel"><a href="javascript:void(0)">X</a></div>
-                            <h4>DANGER ZONE</h4>
+  
+
+
+
+        <!-- -------------------------------------------- OFFCANVS
+        -------------------------------------------- -->
+        <a
+            class="offcanvas_btn"
+            data-bs-toggle="offcanvas"
+            href="#offcanvasExample"
+            role="button"
+            aria-controls="offcanvasExample">
+            <img src="images/slide.png"/>
+        </a>
+        <div
+            class="offcanvas offcanvas-start"
+            data-bs-backdrop="false"
+            tabindex="-1"
+            id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-body">
+                <div class="wrapper">
+                    <div>
+                        <div class="dangerzone" style="display:none;">
+
+                            <div class="header">
+                                <div>[엘시티]</div>
+                                <div class="details">
+                                    <a href="javascript:void(0)">상세정보</a>
+                                </div>
+                            </div>
+                            <div class="body" style="height:360px;">
+                                <div class="left">
+
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="lct-location01"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="lct-location01" class="form-check-label">북풍 (N)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="lct-location02"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="lct-location02" class="form-check-label">북동풍 (NE)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="lct-location03"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="lct-location03" class="form-check-label">동풍 (E)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="lct-location04"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="lct-location04" class="form-check-label">남풍 (S)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="lct-location05"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="lct-location05" class="form-check-label">남서풍 (SW)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="lct-location06"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="lct-location06" class="form-check-label">서풍 (W)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="lct-location07"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="lct-location07" class="form-check-label">북서풍 (NW)</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="header">
+                                <div>[마린시티]</div>
+                                <div class="details">
+                                    <a href="javascript:void(0)">상세정보</a>
+                                </div>
+                            </div>
+                            <div class="body" style="height:360px;">
+                                <div class="left">
+
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="marin-location01"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="marin-location01" class="form-check-label">북풍 (N)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="marin-location02"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="marin-location02" class="form-check-label">북동풍 (NE)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="marin-location03"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="marin-location03" class="form-check-label">동풍 (E)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="marin-location04"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="marin-location04" class="form-check-label">남풍 (S)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="marin-location05"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="marin-location05" class="form-check-label">남서풍 (SW)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="marin-location06"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="marin-location06" class="form-check-label">서풍 (W)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="marin-location07"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="marin-location07" class="form-check-label">북서풍 (NW)</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="header">
+                                <div>[센텀파크]</div>
+                                <div class="details">
+                                    <a href="javascript:void(0)">상세정보</a>
+                                </div>
+                            </div>
+                            <div class="body" style="height:360px;">
+                                <div class="left">
+
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="centum-location01"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="centum-location01" class="form-check-label">북풍 (N)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="centum-location02"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="centum-location02" class="form-check-label">북동풍 (NE)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="centum-location03"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="centum-location03" class="form-check-label">동풍 (E)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="centum-location04"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="centum-location04" class="form-check-label">남풍 (S)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="centum-location05"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="centum-location05" class="form-check-label">남서풍 (SW)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="centum-location06"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="centum-location06" class="form-check-label">서풍 (W)</label>
+                                    </div>
+                                    <div
+                                        style="display:flex;justify-content: left;align-items: center;padding:5px;font-size:1rem;margin-bottom:5px;margin:15px;">
+                                        <input
+                                            type="checkbox"
+                                            name=""
+                                            id="centum-location07"
+                                            class="form-check-input"
+                                            style="width:20px;"/>&nbsp;
+                                        <label for="centum-location07" class="form-check-label">북서풍 (NW)</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="header">
+                                <div>범례 (m/s)</div>
+                            </div>
+                            <div
+                                class="body"
+                                style="display:flex;flex-direction: column;align-items: start;justify-content: start;">
+                                <style>
+                                    .bumlea span::after {
+                                        content: "";
+                                        display: block;
+                                        width: 100%;
+                                        height: 15px;
+                                        position: relative;
+                                        top: 25px;
+                                        text-align: center;
+                                    }
+                                    .bumlea span:nth-child(1)::after {
+                                        content: "~14";
+                                    }
+                                    .bumlea span:nth-child(2)::after {
+                                        content: "14~21";
+                                    }
+                                    .bumlea span:nth-child(3)::after {
+                                        content: "21~";
+                                    }
+                                </style>
+                                <div
+                                    class="left bumlea"
+                                    style="display:flex;justify-content: center;align-items: center;height:100px;">
+                                    <span
+                                        style="width:80px;height:20px;background-color: green;display:block;margin :15px;opacity: 1 !important;"></span>
+                                    <span
+                                        style="width:80px;height:20px;background-color: blue;display:block;margin :15px;opacity: 1 !important;"></span>
+                                    <span
+                                        style="width:80px;height:20px;background-color: red;display:block;margin :15px;opacity: 1 !important;"></span>
+                                </div>
+                                <div
+                                    style="display:flex;justify-content: center;align-items: center;flex-direction: column;height:100px;margin-top:5px;padding: 10px;">
+                                    <div style="margin-top:10px;">투명도</div>
+                                    <div style="margin-top:10px;">
+
+                                        <input
+                                            type="range"
+                                            value="0.7"
+                                            class="opacityController"
+                                            min="0.2"
+                                            max="1"
+                                            step="0.1">
+                                    </form>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="body">
-                            <div class="left"></div>
-                            <div class="right"></div>
                     </div>
-                    <div class="footer">
-                        gg
-                    </div>
+                    <script>
+                        const opacityControlEl = document.querySelector('.opacityController');
+                        opacityControlEl.addEventListener('change', function () {
+                            console.log(opacityControlEl.value);
+
+                            const offcanvasEl = document.querySelector('.offcanvas');
+                            offcanvasEl.style.opacity = opacityControlEl.value;
+                            const offcanvas_btnEl = document.querySelector('.offcanvas_btn');
+                            offcanvas_btnEl.style.opacity = opacityControlEl.value;
+
+                        })
+                    </script>
                 </div>
 
             </div>
-
-          </div>
-          <div class="dropdown mt-3">
- 
-          </div>
+            <div class="dropdown mt-3"></div>
         </div>
-
-
-
-      </div>
-
-
-
-    <!-- ------------------------
-    --------------------
-    BUildingWind Danger Page Fixed
-   -------------------------------------------- -->
-    <div class="buildingDangerFixedBlock" style="position:fixed;width:400px;height:800px;left:70%;top:250px;background-color:white;z-index:700">
-
-
-           <h1>TEST</h1>
-
 
     </div>
 
-    
+    <!-- ------------------------ BUildingWind Danger Page Fixed
+    -------------------------------------------- -->
+    <div
+        class="buildingDangerFixedBlock"
+        style="position:fixed;width:20vw;height:70vh;left:70vw;top:20vh;background-color:white;z-index:700;transition:0.5s;">
+
+        <div
+            style="padding : 15px; border-radius: 10px;display:flex;justify-content: space-between;align-items: center;flex-direction: column;">
+            <div
+                style="border : 1px solid lightgray;width:100%;height:21.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
+                <img src="images/fixed_img01.png"/>
+            </div>
+            <div
+                style="border : 1px solid lightgray;width:100%;height:21.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
+                <img src="images/fixed_img02.gif" style="width:100%; height:100%;"/>
+            </div>
+            <div
+                style="border : 1px solid lightgray;width:100%;height:21.5vh;margin-bottom:10px;display:flex;justify-content: center;align-items: center;padding:2px;">
+                <img src="images/fixed_img03.png" style="width:100%; height:100%;"/>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 
+        HIGHT CHART DATA
+     -->
+
+        <!--    HIGH CHART-->
+     <!--    HIGH CHART-->
+     <div style="display:none">
+
+        <table id="freq" border="0" cellspacing="0" cellpadding="0">
+            <tr nowrap bgcolor="#CCCCFF">
+                <th colspan="9" class="hdr">Table of Frequencies (percent)</th>
+            </tr>
+            <tr nowrap bgcolor="#CCCCFF">
+                <th class="freq"></th>
+                <th class="freq"></th>
+
+            </tr>
+            <tr nowrap>
+                <td class="dir">N</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap bgcolor="#DDDDDD">
+                <td class="dir">NNE</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap>
+                <td class="dir">NE</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap bgcolor="#DDDDDD">
+                <td class="dir">ENE</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap>
+                <td class="dir">E</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap bgcolor="#DDDDDD">
+                <td class="dir">ESE</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap>
+                <td class="dir">SE</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap bgcolor="#DDDDDD">
+                <td class="dir">SSE</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap>
+                <td class="dir">S</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap bgcolor="#DDDDDD">
+                <td class="dir">SSW</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap>
+                <td class="dir">SW</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap >
+                <td class="dir">WSW</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap>
+                <td class="dir">W</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap >
+                <td class="dir">WNW</td>
+                <td class="data">0</td>
+            </tr>
+            <tr nowrap>
+                <td class="dir">NW</td>
+                <td class="data">0</td>
+            </tr>
+            <tr>
+                <td class="dir">NNW</td>
+                <td class="data">0</td>
+            </tr>
+
+        </table>
+    </div>
 
 
-    <!-- BS5  JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+    <!-- BS5 JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
     <!-- JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
 
     <!-- LEAFLET JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+    <!-- CHARTJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+           <!-- HIGHCHART.JS -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-    <!-- SWEETALERT JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-
+<!--        AXIOS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js" integrity="sha512-b94Z6431JyXY14iSXwgzeZurHHRNkLt9d6bAHt7BZT38eqV+GyngIi/tVye4jBKPYQ2lBdRs0glww4fmpuLRwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- JS -->
+  
+    
+    <script src="js/mobile.js"></script>
+    <script src="js/menu06.js"></script>
+    <script src="js/drawChart.js"></script>
     <script src="js/common.js"></script>
+
+
+
+
+        <script>
+            var currentDate = new Date();
+
+            var year = currentDate.getFullYear();
+            var month = currentDate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
+            var day = currentDate.getDate();
+
+            // 월과 일이 한 자리 수일 경우 앞에 0을 붙입니다.
+            month = month < 10 ? '0' + month : '' + month;
+            day = day < 10 ? '0' + day : '' + day;
+
+            var formattedDate = year + month + day;
+
+            console.log(formattedDate);
+            //실시간 풍향
+            realtimeVECIdx =["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
+            realtimeVECVal =[];
+
+            //실시간 풍속
+            realtimeWSDIdx = [];
+            realtimeWSDVal = [];
+
+            idx=0;
+            let basetime=null;
+
+
+            //풍속 가져오기
+            axios.get('/windPower')
+            .then(res=>{
+
+                console.log(res);
+                const data = res.data;
+
+                data.forEach(item=>{
+                    console.log('item ',item);
+                    basetime = item.baseTime;
+                    realtimeWSDIdx.push(item.baseTime);
+                    realtimeWSDVal.push(item.obsrValue);
+                });
+
+                //풍향가져오기
+                axios.get('/windDirection')
+                .then(res=>{
+                        console.log(res);
+                        const data = res.data;
+
+                        data.forEach(item=>{
+                            console.log('item ',item);
+                            basetime = item.baseTime;
+                            realtimeVECVal.push(item.obsrValue);
+
+                        });
+
+                        idx=0;
+                        var intervalId = setInterval(function(){
+
+
+                                //----------------
+                                //    left Chart
+                                //----------------
+                                var newDataPoint = {
+                                    label:realtimeWSDIdx[idx],
+                                    value:realtimeWSDVal[idx]
+                                };
+                                leftConfig.data.labels.push(newDataPoint.label);
+                                leftChart.data.datasets[0].data.push(newDataPoint.value);
+                                leftChart.update();
+
+                                //----------------
+                                //    right Chart
+                                //----------------
+                                //풍향 기호부터 구하기
+                                directionIdx =  parseInt( ( parseInt(realtimeVECVal[idx]) + 22.5 * 0.5)/22.5); //풍향문자 구하기
+                                console.log("realtimeVECVal[idx] : " + realtimeVECVal[idx]);
+                                console.log("directionIdx : " + directionIdx);
+                                console.log("realtimeVECIdx[directionIdx] : " +realtimeVECIdx[directionIdx]);
+
+                                 const leftTableTrDirEls =    document.querySelectorAll("#freq .dir");
+                                 leftTableTrDirEls.forEach(dir=>{
+                                    if(dir.innerHTML == realtimeVECIdx[directionIdx])
+                                    {
+                                        const dataEl =  dir.nextElementSibling;
+                                        dataEl.innerHTML = realtimeWSDVal[idx];
+                                    }
+                                    else
+                                    {
+                                        const dataEl =  dir.nextElementSibling;
+                                        dataEl.innerHTML = 0;
+                                    }
+
+                                 });
+
+                                //----------------
+                                //RIGHT CHART
+                                //----------------
+                                    const ChartBlockRightEl =  document.querySelector('.chartBlock .right');
+                                    ChartBlockRightEl.removeChild(ChartBlockRightEl.children[0]);
+                                    const newrightChartEl = document.createElement('div');
+                                    newrightChartEl.setAttribute('id','container');
+                                    ChartBlockRightEl.appendChild(newrightChartEl);
+                                    rightChart();
+
+
+                                //----------------
+                                //REALTIME 테이블에 추가
+                                //----------------
+                                const tblEl = document.querySelector('.realtimeTbl');
+                                const trEl = document.createElement('tr');
+                                const td1 = document.createElement('td'); td1.innerHTML=idx;
+                                const td2 = document.createElement('td'); td2.innerHTML=realtimeWSDIdx[idx];
+                                const td3 = document.createElement('td'); td3.innerHTML= realtimeVECVal[idx]+"/"+realtimeVECIdx[directionIdx]
+                                const td4 = document.createElement('td'); td4.innerHTML= realtimeWSDVal[idx];
+
+                                trEl.appendChild(td1);trEl.appendChild(td2);
+                                trEl.appendChild(td3);trEl.appendChild(td4);
+                                tblEl.appendChild(trEl);
+
+                                //스크롤바를 아래로 내리기
+                                const sectionLeftEl = document.querySelector('section.left');
+                                sectionLeftEl.scrollTop = container.scrollHeight;
+
+                                //----------------
+                                // IDX 증가
+                                //----------------
+                                idx++;
+
+
+                                if(idx>=realtimeVECVal.length){
+                                    clearInterval(intervalId);
+                                }
+
+                        },2000);
+
+                 })
+                 .catch(err=>{});
+
+            })
+            .catch(err=>{});
+
+
+
+        </script>
+
+
+
+
 
 </body>
 </html>

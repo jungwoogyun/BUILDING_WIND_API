@@ -1,0 +1,627 @@
+*{
+    box-sizing:border-box;
+    width : 100%;
+    
+    position:relative;
+
+}
+
+/* GOOGLE ICON  */
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+    font-size: 2.2rem;
+    
+  };
+ 
+
+  
+body{
+    font-family: 'Montserrat', sans-serif;
+    min-height: 400px;
+    width:400px;   
+    
+}
+body::-webkit-scrollbar{
+    display: none;
+
+}
+.wrapper{
+     /* 1600px; 900px */
+    /* width : 100rem;
+    height : 56.25rem;  
+    margin : 0 auto; */
+  
+}
+
+/* HEADER */
+.wrapper>header{
+    position:fixed;
+    left:0px;
+    top:0px;
+    width:100%;
+    
+    background-color: white;
+    z-index : 555;
+}
+
+.wrapper>header>.top-header{
+   
+    display:none;
+  
+}
+.wrapper>header>.top-header>div{
+    height : 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items : center;
+    color:white;
+    font-size:0.8rem;
+    padding-left : 0px;
+    padding-right :0px;
+}
+.wrapper>header>.top-header .left{
+    text-align: left;
+    display:flex;
+    justify-content: left;
+    align-items: center;
+
+   
+}
+.wrapper>header>.top-header>div>.left:nth-child(1){
+    width:50rem; 
+
+}
+.wrapper>header>.top-header>div>.left:nth-child(2){
+     
+}
+
+.wrapper>header>.top-header .right{
+    display:flex;
+    justify-content: right;
+    align-items: right;
+    text-align:right;
+    width : 50px;
+    color:white;
+    margin:0px;padding:0px;
+}
+.wrapper>header>.top-header .right a{
+    color:white;
+}
+.wrapper>header>.top-header .right a:hover{
+    opacity: 0.5;
+}
+.wrapper>header>nav{
+    
+    width:100vw;
+    height : 85px;
+    padding : 0px;
+    overflow:hidden;
+    background-color: #2A76C7;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.wrapper>header>nav>div{
+
+}
+
+.wrapper>header>nav ul {
+    
+    margin : 0px;
+    padding : 0px;
+  
+
+    display:flex;
+
+    
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /* border : 1px solid green; */
+    width : 100vw;
+    left:-13vw;
+    margin : 0 auto;
+    
+
+}
+.wrapper>header>nav ul li{
+    
+    width : 55px;
+    height : 50px;
+   
+    border : 1px solid white;
+    background-color: #1D5087;
+    
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.4s;
+    
+}
+.wrapper>header>nav ul li a{
+    display :flex;
+    justify-content: start;
+    align-items: center;
+    width : 60px;
+    height : 50px;
+
+}
+
+
+.hrtg{
+    display:block;
+    width : 100vw;
+    height : 35px;
+    line-height:35px;
+    background-color: lightgray;
+    text-align: center;
+
+}
+
+
+.wrapper>header>nav ul li:hover{
+    background-color: #15395f;
+}
+.wrapper>header>nav ul li a>.title{
+    font-size : 0.8rem;
+    margin-top:7px;
+}
+.wrapper>header>nav ul li a .title:last-child{
+    font-size:0.5rem;
+}
+
+/* MAIN */
+
+.wrapper>main{
+  
+    margin-top :135px;
+    top:-50px;
+
+}
+.wrapper>main>section{
+    position:absolute;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:800px;
+    display:none;
+}
+
+
+.wrapper>main>section:nth-child(1){
+   display:block;
+  
+   
+   width:100vw;
+
+
+}
+.wrapper>main>section:nth-child(1) video{
+  
+    
+}
+
+/* FOOTER */
+.wrapper>footer{
+
+}
+
+
+/* OPENCANVAS */
+.offcanvas_btn{
+   display:none;
+   position:fixed;
+   top:50vh;
+   left:0px;
+   width:20px;
+   background-color: black;
+   opacity: 0.7;
+   z-index:999;
+   border-radius: 0 5px 5px 0;
+   transition:0.3s;
+   transition-timing-function: ease-in-out;
+}
+.offcanvas_btn img{
+    width :20px;
+    left:-1px;
+
+    
+}
+.ToRight{
+    transform:translateX(400px);
+}
+.ToLeft{
+    transform:translateX(0px);
+}
+
+
+.offcanvas{
+    height:100vh;
+    width:400px;
+    background-color: black;
+    opacity: 0.7;
+    z-index: 400;
+}
+
+.offcanvas .offcanvas-body{
+
+}
+.offcanvas .offcanvas-body::-webkit-scrollbar{
+    display:none;
+}
+
+.offcanvas .offcanvas-body>.wrapper{
+    display:flex;
+    justify-content: center; 
+    align-items: start; 
+    width:350px;
+   
+   
+    position:relative;
+    top:150px;
+    padding:5px;
+}
+
+
+
+.offcanvas .offcanvas-body>.wrapper .dangerzone{
+    display:flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    padding : 10px;
+    margin-bottom:20px;
+    opacity : 0.8;
+    color:white;
+    padding : 10px;
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone a{
+    text-decoration: none;
+    color:white;
+
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.header{
+    width :  319px;
+    height : 50px;
+    border: 1px solid;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    margin-bottom:5px;
+    padding:5px;
+
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.header>a {
+
+    text-decoration: none;
+    
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.body{
+    height : 200px;
+    display:flex;
+    justify-content: space-between;
+    margin-bottom:5px;
+
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.body>div{
+    border : 1px solid ;
+
+}
+
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.footer{
+    height : 50px;
+    border : 1px solid ;
+}
+
+.details{
+
+    text-align:right;
+}
+/*  */
+.offcanvas .offcanvas-body>.wrapper .dangerzone{
+    display:flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    font-size : 1.2rem;
+    padding : 10px;
+    margin-bottom:20px;
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.header{
+    width :  319px;
+    height : 50px;
+    border: 1px solid;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    margin-bottom:5px;
+    padding:5px;
+    font-weight: 800;
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.header>h4{
+
+    
+    
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.body{
+    height : 450px;
+    display:flex;
+    justify-content: space-between;
+    margin-bottom:5px;
+
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.body>div{
+    border : 1px solid ;
+
+}
+
+
+
+/* MAP */
+.wrapper>main>section>#map{
+ 
+    position:fixed;
+    width:100vw;
+    left:calc(-50vw + 50%);
+    height:100vh
+}
+
+.wrapper>main>section>#map .leaflet-control-container{
+    width : 50px;
+    top:5%;  
+    
+}
+.wrapper>main>section>#map  .leaflet-control-zoom{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position:relative;
+    left:90vw;
+
+
+}
+
+/* MAP MARKER */
+.leaflet-popup{
+
+  
+    width :400px;
+   
+}
+.leaflet-popup-content-wrapper{
+    width : 400px ;
+    height:400px;
+    margin:0 auto;
+}
+
+/* MAP -- */
+.leaflet-control-zoom{
+   border : 0px !important;
+}
+
+
+.buildingDangerFixedBlock{
+    display:none;
+}
+
+
+
+.section01 .youtubeBlk {
+ /* border : 2px solid lightgray; */
+
+ top:270px;  
+ left:0;
+
+ 
+}
+.section01 .youtubeBlk .wrapper{
+
+    position:relative;
+
+}
+.section01 .youtubeBlk .wrapper .videoblock{
+  display:flex;
+
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  height:400px;  
+  
+  margin : 0 auto;
+  /* border : 1px solid orange; */
+  
+}
+
+.section01 .youtubeBlk .wrapper .videoblock div{
+    width : 120px;
+    height : 120px;
+    border : 1px solid lightgray;
+    
+ 
+}
+
+.section01 .youtubeBlk .wrapper .videoblock>div{
+    background-color: white;
+    border-radius: 10px;
+    
+}
+
+.section01 .youtubeBlk .wrapper .videoblock div .material-symbols-outlined{
+    display:relative;
+    left:0px;
+    top:0px;
+    color : white;
+    border : 1px solid white;
+    width : 50px;
+    border-radius: 10px;
+    background-color: rgb(174, 46, 46);
+
+
+}
+.section01 .youtubeBlk .wrapper .videoblock div .material-symbols-outlined.naver{
+    background-color: rgb(38, 149, 42) ;
+}
+
+.modal{
+    height : 350px;
+    margin-top : 25vh
+}
+.modal iframe{
+    width : 500px;
+    height : 200px;;
+}
+    /* 모달창 Style */
+    .modal-dialog.modal-xl {
+        position:relative;
+        top:80px;
+        width:1200px;
+        height: 700px;
+  
+    }
+    .modal-dialog .modal-body{
+        height:200px;
+    }
+
+    .modal-body{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .modal-body>div{
+        width : 400px;
+        height: 100%;
+        border : 1px solid gray;
+        border-radius: 15px;
+        margin:10px;
+        padding : 10px;
+        text-align: center;
+    }
+
+
+
+
+
+
+/* 06 실시간 풍속정보 */
+.section06{
+ display: block;
+ position: relative;  
+
+}
+.section06>.left
+{
+   display:block;
+   position: relative;
+   width : 100%;
+   height : 150px;
+   left:0;right:0;top:0;bottom:0;
+   margin:0 auto;
+   top:5px !important;
+   /* border : 1px solid red; */
+   border-bottom : 1px solid lightgray;
+   
+}
+.section06>.left img{
+    width : 100%;
+    height : 100%;
+}
+.section06>.right
+{
+    width : 100%;
+    display:block;
+    position: relative;  
+    left:0;right:0;top:10px;bottom:0;
+    margin:0 auto;
+}
+
+
+.section06>.right>.tbl_block{
+
+    display:block;
+    position: relative;  
+    /* border : 1px solid red; */
+    height : 150px;
+    font-size:0.5rem;
+    margin-bottom: 5px;
+    border-bottom : 1px solid lightgray;
+}
+
+
+.section06>.right>.chartBlock{
+    display:block;
+   position: relative;  
+   /* border : 1px solid red; */
+   display:flex;justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.section06>.right>.chartBlock>.left{
+   display:block;
+   position: relative;  
+   top:0;bottom:0;left:0;right:0;
+   
+   border-bottom : 1px solid lightgray;
+   width : 100% !important;
+   height : 160px !important;
+
+    
+}
+.section06>.right>.chartBlock>.left{
+    /* width:200px;
+    height : 100%;
+    display: flex; */
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    display:block;
+}
+.section06>.right>.chartBlock>.left canvas{
+
+    display:block !important;
+    position:relative !important;
+    margin : 0 auto;
+
+    
+}
+canvas#leftChart{
+  
+
+}
+
+.section06>.right>.chartBlock>.right{
+  
+    left:0;right:0;top:0px;bottom:0;
+    margin:0 auto;
+    position:relative;
+    top: 35px;
+    width : 200px;
+    height : 200px;
+
+    /* border : 1px solid blue; */
+    z-index:-1;
+     
+}
+.section06>.right>.chartBlock>.right  .container{
+    position: relative;
+    width : 200px;
+    height : 200px;
+
+    /* border : 1px solid blue; */
+}
+
+th,td{
+    width:50px;
+    text-align:center;
+}
+  

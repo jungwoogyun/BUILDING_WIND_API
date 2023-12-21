@@ -16,8 +16,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
@@ -29,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class BuildingWindController {
+public class  BuildingWindController {
 
 
     private  String serviceKey = "xYZ80mMcU8S57mCCY/q8sRsk7o7G8NtnfnK7mVEuVxdtozrl0skuhvNf34epviHrru/jiRQ41FokE9H4lK0Hhg==";
@@ -45,6 +47,7 @@ public class BuildingWindController {
     private RealTimeWindDirectionRepostitory realTimeWindDirectionRepostitory;
 
     @GetMapping(value = "/realTime" ,  produces= MediaType.APPLICATION_JSON_VALUE)
+    @Transactional(rollbackFor=Exception.class)
     public @ResponseBody List<ResponseEntity<WeatherResponse>> realTime(
 
     ) throws ParseException, java.text.ParseException, InterruptedException {
@@ -212,13 +215,16 @@ public class BuildingWindController {
 
         list.forEach(item->System.out.println(item));
 
-
-
-
         return list;
     }
 
+
+
+
+
+
 }
+
 
 
 @Data

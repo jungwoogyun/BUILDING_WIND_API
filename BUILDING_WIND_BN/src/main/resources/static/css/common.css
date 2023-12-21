@@ -24,7 +24,8 @@
 body{
     font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
-    width:100%;
+    width:100%;    
+    
 }
 body::-webkit-scrollbar{
     display: none;
@@ -32,10 +33,10 @@ body::-webkit-scrollbar{
 }
 .wrapper{
      /* 1600px; 900px */
-    width : 100rem;
+    /* width : 100rem;
     height : 56.25rem;  
-    margin : 0 auto;
-   
+    margin : 0 auto; */
+  
 }
 
 /* HEADER */
@@ -44,9 +45,9 @@ body::-webkit-scrollbar{
     left:0px;
     top:0px;
     width:100%;
-    height : 200px;
+    
     background-color: white;
-    z-index : 555;
+    z-index : 999;
 }
 
 .wrapper>header>.top-header{
@@ -96,7 +97,7 @@ body::-webkit-scrollbar{
 }
 .wrapper>header>nav{
     width:100vw;
-    height : 140px;
+    height : 80px;
     padding : 0px;
     overflow:hidden;
     background-color: #2A76C7;
@@ -116,8 +117,8 @@ body::-webkit-scrollbar{
 }
 .wrapper>header>nav ul li{
     
-    width : 120px;
-    height : 120px;
+    width : 130px;
+    height : 60px;
    
     border : 2px solid white;
     background-color: #1D5087;
@@ -126,10 +127,19 @@ body::-webkit-scrollbar{
     justify-content: center;
     align-items: center;
     text-align: center;
-  
+    cursor: pointer;
+    transition: 0.4s;
 }
 .wrapper>header>nav ul li a{
-    display :block;
+    display :flex;
+    justify-content: start;
+    align-items: center;
+
+
+}
+
+.wrapper>header>nav ul li:hover{
+    background-color: #15395f;
 }
 .wrapper>header>nav ul li a>.title{
     font-size : 0.8rem;
@@ -142,23 +152,35 @@ body::-webkit-scrollbar{
 
 /* MAIN */
 
+.hrtg
+{
+    display:none;
+}
 .wrapper>main{
   
-    margin-top :180px;
-    
+    margin-top :130px;
+
 
 }
 .wrapper>main>section{
-
-    position:relative;
+    position:absolute;
     display:flex;
     justify-content: center;
     align-items: center;
     height:800px;
+    display:none;
 }
 
 
+.wrapper>main>section:nth-child(1){
+   display:block;
+   width:100vw;
 
+}
+.wrapper>main>section:nth-child(1) video{
+  
+    
+}
 
 /* FOOTER */
 .wrapper>footer{
@@ -168,13 +190,14 @@ body::-webkit-scrollbar{
 
 /* OPENCANVAS */
 .offcanvas_btn{
+
    position:fixed;
    top:50vh;
    left:0px;
    width:20px;
    background-color: black;
    opacity: 0.7;
-   z-index:999;
+   z-index:666;
    border-radius: 0 5px 5px 0;
    transition:0.3s;
    transition-timing-function: ease-in-out;
@@ -222,7 +245,7 @@ body::-webkit-scrollbar{
 
 
 
-.offcanvas .offcanvas-body>.wrapper .buildingwind{
+.offcanvas .offcanvas-body>.wrapper .dangerzone{
     display:flex;
     justify-content: start;
     align-items: start;
@@ -233,7 +256,12 @@ body::-webkit-scrollbar{
     color:white;
     padding : 10px;
 }
-.offcanvas .offcanvas-body>.wrapper .buildingwind>.header{
+.offcanvas .offcanvas-body>.wrapper .dangerzone a{
+    text-decoration: none;
+    color:white;
+
+}
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.header{
     width :  319px;
     height : 50px;
     border: 1px solid;
@@ -244,29 +272,32 @@ body::-webkit-scrollbar{
     padding:5px;
 
 }
-.offcanvas .offcanvas-body>.wrapper .buildingwind>.header>h4{
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.header>a {
 
-    
+    text-decoration: none;
     
 }
-.offcanvas .offcanvas-body>.wrapper .buildingwind>.body{
-    height : 300px;
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.body{
+    height : 200px;
     display:flex;
     justify-content: space-between;
     margin-bottom:5px;
 
 }
-.offcanvas .offcanvas-body>.wrapper .buildingwind>.body>div{
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.body>div{
     border : 1px solid ;
 
 }
 
-.offcanvas .offcanvas-body>.wrapper .buildingwind>.footer{
+.offcanvas .offcanvas-body>.wrapper .dangerzone>.footer{
     height : 50px;
     border : 1px solid ;
 }
 
+.details{
 
+    text-align:right;
+}
 /*  */
 .offcanvas .offcanvas-body>.wrapper .dangerzone{
     display:flex;
@@ -304,36 +335,6 @@ body::-webkit-scrollbar{
     border : 1px solid ;
 
 }
-
-.offcanvas .offcanvas-body>.wrapper .dangerzone>.footer{
-    height : 50px;
-    border : 1px solid ;
-}
-
-/* OFFCANVAS X BUTTON */
-.offcanvas .offcanvas-body>.wrapper .buildingwind>.header>.cancel{
-    width : 150px;
-}
-
-
-.offcanvas .offcanvas-body>.wrapper .buildingwind>.header>.cancel>a{
-
- text-decoration: none;
- color:white;
-
-}
-/* OFFCANVAS X BUTTON */
-.offcanvas .offcanvas-body>.wrapper .dangerzone>.header>.cancel{
-
-
-}
-.offcanvas .offcanvas-body>.wrapper .dangerzone>.header>.cancel>a{
-
-    width : 100%;
-     text-decoration: none;
-     color:white;
-}
-
 
 
 
@@ -380,3 +381,195 @@ body::-webkit-scrollbar{
 .leaflet-control-zoom{
    border : 0px !important;
 }
+
+
+.buildingDangerFixedBlock{
+    display:none;
+}
+
+
+
+/* YOUTUBE */
+
+.section01 .youtubeBlk .wrapper{
+    width:100%;
+
+
+}
+.section01 video {
+    position:relative;
+    z-index:777;
+}
+.section01 .youtubeBlk {
+    position:absolute;
+    left:20vw;
+    top:62vh;
+
+}
+.section01 .youtubeBlk .wrapper .videoblock{
+  display:flex;
+
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  
+  
+
+
+}
+
+.section01 .youtubeBlk .wrapper .videoblock div{
+    width : 150px;
+    height : 100px;
+    border : 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    text-align: center;
+    z-index:888;
+    
+}
+.section01 .youtubeBlk .wrapper div{
+ margin:20px;
+ 
+}
+
+.section01 .youtubeBlk .wrapper .videoblock div{
+    background-color: white;
+    border-radius: 10px;
+}
+
+.section01 .youtubeBlk .wrapper .videoblock div .material-symbols-outlined{
+    display:absolute;
+    left:0px;
+    top:0px;
+    color : white;
+    border : 1px solid white;
+    width : 50px;
+    border-radius: 10px;
+    background-color: rgb(174, 46, 46);
+
+}
+.section01 .youtubeBlk .wrapper .videoblock div .material-symbols-outlined.naver{
+    background-color: rgb(38, 149, 42) ;
+}
+
+.modal iframe{
+    width : 100%;
+    height : 100%;
+}
+
+
+.section02 .left{
+    height : 800px;
+    z-index:999;
+}
+
+    /* 모달창 Style */
+    .modal-dialog.modal-xl {
+        position:relative;
+        top:80px;
+        width:1200px;
+        height: 700px;
+  
+    }
+    .modal-dialog .modal-body{
+        height:700px;
+    }
+
+    .modal-body{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .modal-body>div{
+        width : 400px;
+        height: 100%;
+        border : 1px solid gray;
+        border-radius: 15px;
+        margin:10px;
+        padding : 10px;
+        text-align: center;
+    }
+
+
+
+/* 06 실시간 풍속정보 */
+.section06{
+    width : 100vw;
+    height : 100vh;
+    
+    display:flex;
+    justify-content: center;
+  
+}
+.section06>.left
+{
+   
+  
+    width : 30vw;
+    height : 40vh;
+
+    margin : 10px;
+    left:4vw;
+    position:fixed;
+    top:35vh !important;
+   
+}
+
+.section06>.right
+{
+
+    width : 60vw;
+    height : 30vh;
+ 
+    margin : 10px;
+    left:35vw;
+    top:-28.7vw;
+ 
+    position:fixed;top:20vh;
+}
+
+
+.section06>.right>.tbl_block{
+
+    overflow:auto;height:30vh;
+}
+
+
+.section06>.right>.chartBlock{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:10px;
+    top:-1.5vw;
+    margin-top:10px;
+}
+
+.section06>.right>.chartBlock>.left{
+    
+    width:60vw !important;
+    height:100%;
+}
+.section06>.right>.chartBlock>.left>#leftChart{
+  
+}
+.section06>.right>.chartBlock>.left{
+    width:200px;
+    height : 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.section06>.right>.chartBlock>.right{
+display:flex;justify-content: center;
+align-items: center;margin:0 auto;
+}
+
+th,td{
+    width:100px;
+    text-align:center;
+}
+  
