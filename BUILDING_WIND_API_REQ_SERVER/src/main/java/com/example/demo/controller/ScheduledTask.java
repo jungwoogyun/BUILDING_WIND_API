@@ -22,7 +22,7 @@ public class ScheduledTask {
 //    @Scheduled(cron = "0 15 10 ? * 6L") // 매월 마지막 금요일 아무날이나 10:15:00에 실행
 //    @Scheduled(cron = "0 15 10 15 * ?") // 아무요일, 매월 15일 10:15:00에 실행
 //    @Scheduled(cron = "* /1 * * * *") // 매 1분마다 실행
-    @Scheduled(cron = "* */20 * * * *") // 매 10분마다 실행
+    @Scheduled(cron = "* */30 * * * *") // 매 10분마다 실행
     public void executeTask() {
         RestTemplate restTemplate= new RestTemplate();
         // GET 요청 보내기
