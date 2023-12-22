@@ -2,11 +2,13 @@ package com.example.demo.controller;
 
 
 import com.example.demo.domain.entity.RealTimeWindDirection;
+import com.example.demo.domain.entity.RealTimeWindNow;
 import com.example.demo.domain.entity.RealTimeWindPower;
 import com.example.demo.domain.repository.LocationRepository;
 
 
 import com.example.demo.domain.repository.RealTimeWindDirectionRepostitory;
+import com.example.demo.domain.repository.RealTimeWindNowRepostitory;
 import com.example.demo.domain.repository.RealTimeWindPowerRepostitory;
 import com.example.demo.properties.RealTimeProperties;
 import lombok.Data;
@@ -33,7 +35,7 @@ import java.util.List;
 @Controller
 public class  BuildingWindController {
 
-
+    static String nowTime;
     private  String serviceKey = "xYZ80mMcU8S57mCCY/q8sRsk7o7G8NtnfnK7mVEuVxdtozrl0skuhvNf34epviHrru/jiRQ41FokE9H4lK0Hhg==";
 
     @Autowired
@@ -46,9 +48,14 @@ public class  BuildingWindController {
     @Autowired
     private RealTimeWindDirectionRepostitory realTimeWindDirectionRepostitory;
 
+
+    @Autowired
+    private RealTimeWindNowRepostitory realTimeWindNowRepostitory;
+
+
     @GetMapping(value = "/realTime" ,  produces= MediaType.APPLICATION_JSON_VALUE)
     @Transactional(rollbackFor=Exception.class)
-    public @ResponseBody List<ResponseEntity<WeatherResponse>> realTime(
+    public @ResponseBody void  realTime(
 
     ) throws ParseException, java.text.ParseException, InterruptedException {
 
@@ -77,7 +84,8 @@ public class  BuildingWindController {
             day = (cal.get(Calendar.DAY_OF_MONTH)-1)+"";
 
         }else{
-            time = (Integer.parseInt(time) -100)+"";
+            //time = (Integer.parseInt(time) -100)+"";
+            time = (Integer.parseInt(time))+"";
 
         }
         if(Integer.parseInt(day.substring(0,2)) <10){
@@ -90,6 +98,7 @@ public class  BuildingWindController {
 
 
         System.out.println("TIME : " + time);
+        this.nowTime = time;        //
         String nowDate = year+month+day;
         System.out.println("NOWDATE :" + nowDate);
 
@@ -105,87 +114,34 @@ public class  BuildingWindController {
         String nx = RealTimeProperties.nx;
         String ny = RealTimeProperties.ny;
 
-        //URL 설정
-        String url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=" +serviceKey+
-                "&pageNo=" +pageNo+
-                "&numOfRows=" +numOfRows+
-                "&dataType=" +dataType+
-                "&base_date=" +nowDate+
-                "&base_time=" +base_time+
-                "&nx=" +nx+
-                "&ny="+ny;
+
+        try {
+            //URL 설정
+            String url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=" + serviceKey +
+                    "&pageNo=" + pageNo +
+                    "&numOfRows=" + numOfRows +
+                    "&dataType=" + dataType +
+                    "&base_date=" + nowDate +
+                    "&base_time=" + base_time +
+                    "&nx=" + nx +
+                    "&ny=" + ny;
 
 
-
-        List<ResponseEntity<WeatherResponse>> list = new ArrayList<>();
-        ResponseEntity<WeatherResponse> resp = restTemplate.exchange(url, HttpMethod.GET,null,WeatherResponse.class);
-        list.add(resp);
-
-        Thread.sleep(3000);
-
-
-        realTimeWindPowerRepostitory.deleteAll();
-        realTimeWindDirectionRepostitory.deleteAll();
-
-        resp.getBody().getResponse().getBody().getItems().getItem().forEach(item-> {
-            if(item.getCategory().equals("WSD")){
-                RealTimeWindPower realTimeWindPower = new RealTimeWindPower();
-                realTimeWindPower.setBaseTime(item.getBaseTime());
-                realTimeWindPower.setBaseDate(item.getBaseDate());
-                realTimeWindPower.setObsrValue(item.getObsrValue());
-                realTimeWindPower.setCategory(item.getCategory());
-                realTimeWindPower.setNx(item.getNx());
-                realTimeWindPower.setNy(item.getNy());
-                realTimeWindPowerRepostitory.save(realTimeWindPower);
-            }
-            //풍향
-            if(item.getCategory().equals("VEC")){
-                RealTimeWindDirection realTimeWindDirection = new RealTimeWindDirection();
-                realTimeWindDirection.setBaseTime(item.getBaseTime());
-                realTimeWindDirection.setBaseDate(item.getBaseDate());
-                realTimeWindDirection.setObsrValue(item.getObsrValue());
-                realTimeWindDirection.setCategory(item.getCategory());
-                realTimeWindDirection.setNx(item.getNx());
-                realTimeWindDirection.setNy(item.getNy());
-                realTimeWindDirectionRepostitory.save(realTimeWindDirection);
-            }
-        });
-
-
-
-
-
-        SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
-        while(true)
-        {
-
-            Date date = sdf.parse(base_time);
-            // Calendar 객체를 사용하여 시간을 증가
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            calendar.add(Calendar.HOUR, 1);
-            // 변환된 시간을 다시 문자열로 형식화
-            base_time = sdf.format(calendar.getTime());
-            System.out.println("base_time : "  + base_time);
-
-
-            url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=" +serviceKey+
-                "&pageNo=" +pageNo+
-                "&numOfRows=" +numOfRows+
-                "&dataType=" +dataType+
-                "&base_date=" +nowDate+
-                "&base_time=" +base_time+
-                "&nx=" +nx+
-                "&ny="+ny;
-            resp = restTemplate.exchange(url, HttpMethod.GET,null,WeatherResponse.class);
+            List<ResponseEntity<WeatherResponse>> list = new ArrayList<>();
+            ResponseEntity<WeatherResponse> resp = restTemplate.exchange(url, HttpMethod.GET, null, WeatherResponse.class);
             list.add(resp);
 
             Thread.sleep(3000);
 
 
+            //------------------------------------------
 
-            resp.getBody().getResponse().getBody().getItems().getItem().forEach(item-> {
-                if(item.getCategory().equals("WSD")){
+            //------------------------------------------
+            realTimeWindPowerRepostitory.deleteAll();
+            realTimeWindDirectionRepostitory.deleteAll();
+            realTimeWindNowRepostitory.deleteAll();
+            resp.getBody().getResponse().getBody().getItems().getItem().forEach(item -> {
+                if (item.getCategory().equals("WSD")) {
                     RealTimeWindPower realTimeWindPower = new RealTimeWindPower();
                     realTimeWindPower.setBaseTime(item.getBaseTime());
                     realTimeWindPower.setBaseDate(item.getBaseDate());
@@ -196,7 +152,7 @@ public class  BuildingWindController {
                     realTimeWindPowerRepostitory.save(realTimeWindPower);
                 }
                 //풍향
-                if(item.getCategory().equals("VEC")){
+                if (item.getCategory().equals("VEC")) {
                     RealTimeWindDirection realTimeWindDirection = new RealTimeWindDirection();
                     realTimeWindDirection.setBaseTime(item.getBaseTime());
                     realTimeWindDirection.setBaseDate(item.getBaseDate());
@@ -206,19 +162,94 @@ public class  BuildingWindController {
                     realTimeWindDirection.setNy(item.getNy());
                     realTimeWindDirectionRepostitory.save(realTimeWindDirection);
                 }
+
+
             });
 
 
-            if(base_time.equals(time))
-                break;
+            SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
+
+            //------------------------------------------
+            //
+            //------------------------------------------
+            while (true) {
+
+                Date date = sdf.parse(base_time);
+                // Calendar 객체를 사용하여 시간을 증가
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+                calendar.add(Calendar.HOUR, 1);
+                // 변환된 시간을 다시 문자열로 형식화
+                base_time = sdf.format(calendar.getTime());
+                System.out.println("base_time : " + base_time);
+
+
+                url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=" + serviceKey +
+                        "&pageNo=" + pageNo +
+                        "&numOfRows=" + numOfRows +
+                        "&dataType=" + dataType +
+                        "&base_date=" + nowDate +
+                        "&base_time=" + base_time +
+                        "&nx=" + nx +
+                        "&ny=" + ny;
+                resp = restTemplate.exchange(url, HttpMethod.GET, null, WeatherResponse.class);
+                list.add(resp);
+
+                Thread.sleep(4000);
+
+
+                resp.getBody().getResponse().getBody().getItems().getItem().forEach(item -> {
+                    if (item.getCategory().equals("WSD")) {
+                        RealTimeWindPower realTimeWindPower = new RealTimeWindPower();
+                        realTimeWindPower.setBaseTime(item.getBaseTime());
+                        realTimeWindPower.setBaseDate(item.getBaseDate());
+                        realTimeWindPower.setObsrValue(item.getObsrValue());
+                        realTimeWindPower.setCategory(item.getCategory());
+                        realTimeWindPower.setNx(item.getNx());
+                        realTimeWindPower.setNy(item.getNy());
+                        realTimeWindPowerRepostitory.save(realTimeWindPower);
+                    }
+                    //풍향
+                    if (item.getCategory().equals("VEC")) {
+                        RealTimeWindDirection realTimeWindDirection = new RealTimeWindDirection();
+                        realTimeWindDirection.setBaseTime(item.getBaseTime());
+                        realTimeWindDirection.setBaseDate(item.getBaseDate());
+                        realTimeWindDirection.setObsrValue(item.getObsrValue());
+                        realTimeWindDirection.setCategory(item.getCategory());
+                        realTimeWindDirection.setNx(item.getNx());
+                        realTimeWindDirection.setNy(item.getNy());
+                        realTimeWindDirectionRepostitory.save(realTimeWindDirection);
+                    }
+
+                    if (BuildingWindController.nowTime.equals(item.getBaseTime())) {
+                        RealTimeWindNow realTimeWindNow = new RealTimeWindNow();
+                        realTimeWindNow.setBaseTime(item.getBaseTime());
+                        realTimeWindNow.setBaseDate(item.getBaseDate());
+                        realTimeWindNow.setObsrValue(item.getObsrValue());
+                        realTimeWindNow.setCategory(item.getCategory());
+                        realTimeWindNow.setNx(item.getNx());
+                        realTimeWindNow.setNy(item.getNy());
+                        realTimeWindNowRepostitory.save(realTimeWindNow);
+                    }
+
+                });
+                if (base_time.equals(time))
+                    break;
+
+
+            }
+
+            list.forEach(item -> System.out.println(item));
+        }catch(NullPointerException e){
+            //Thread.sleep(10000);
+            System.out.println("EXCEPTION...e : " + e.getMessage());
+            e.printStackTrace();
+            //String response = restTemplate.getForObject("http://localhost:8085/realTime", String.class);
+
         }
 
-        list.forEach(item->System.out.println(item));
 
-        return list;
     }
-
-
 
 
 
