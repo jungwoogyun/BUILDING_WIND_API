@@ -4,7 +4,6 @@ package com.example.demo.controller;
 import com.example.demo.domain.entity.RealTimeWindDirection;
 import com.example.demo.domain.entity.RealTimeWindNow;
 import com.example.demo.domain.entity.RealTimeWindPower;
-import com.example.demo.domain.repository.LocationRepository;
 
 
 import com.example.demo.domain.repository.RealTimeWindDirectionRepostitory;
@@ -38,8 +37,7 @@ public class  BuildingWindController {
     static String nowTime;
     private  String serviceKey = "xYZ80mMcU8S57mCCY/q8sRsk7o7G8NtnfnK7mVEuVxdtozrl0skuhvNf34epviHrru/jiRQ41FokE9H4lK0Hhg==";
 
-    @Autowired
-    private LocationRepository locationRepository;
+
 
     //REST REQ
 
@@ -83,8 +81,8 @@ public class  BuildingWindController {
             day = (cal.get(Calendar.DAY_OF_MONTH)-1)+"";
 
         }else{
-            //time = (Integer.parseInt(time) -100)+"";
-            time = (Integer.parseInt(time))+"";
+            time = (Integer.parseInt(time) -100)+"";
+
 
         }
         if(Integer.parseInt(day.substring(0,2)) <10){
@@ -138,7 +136,7 @@ public class  BuildingWindController {
             //------------------------------------------
             realTimeWindPowerRepostitory.deleteAll();
             realTimeWindDirectionRepostitory.deleteAll();
-
+            System.out.println(resp);
             resp.getBody().getResponse().getBody().getItems().getItem().forEach(item -> {
                 if (item.getCategory().equals("WSD")) {
                     RealTimeWindPower realTimeWindPower = new RealTimeWindPower();
@@ -219,16 +217,9 @@ public class  BuildingWindController {
                         realTimeWindDirection.setNy(item.getNy());
                         realTimeWindDirectionRepostitory.save(realTimeWindDirection);
                     }
-
-
                 });
-                if (base_time.equals(time))
-                    break;
-
-
             }
 
-            list.forEach(item -> System.out.println(item));
         }catch(NullPointerException e){
             //Thread.sleep(10000);
             System.out.println("EXCEPTION...e : " + e.getMessage());

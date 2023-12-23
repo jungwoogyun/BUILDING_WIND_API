@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.repository.RealTimeWindDirectionRepostitory;
+import com.example.demo.domain.repository.RealTimeWindPowerRepostitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -9,6 +11,13 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class ScheduledTask {
+
+    @Autowired
+    private RealTimeWindPowerRepostitory realTimeWindPowerRepostitory;
+    @Autowired
+    private RealTimeWindDirectionRepostitory realTimeWindDirectionRepostitory;
+
+
 
     private final String targetUrl = "http://localhost:8085/realTime"; //
 //      @Scheduled(cron = "0 20 9 * * *") // 매일 09시 실행
@@ -22,13 +31,23 @@ public class ScheduledTask {
 //    @Scheduled(cron = "0 15 10 ? * 6L") // 매월 마지막 금요일 아무날이나 10:15:00에 실행
 //    @Scheduled(cron = "0 15 10 15 * ?") // 아무요일, 매월 15일 10:15:00에 실행
 //    @Scheduled(cron = "* /1 * * * *") // 매 1분마다 실행
-    @Scheduled(cron = "0 */20 * * * *")	// 20분
-    public void executeTask() {
-        RestTemplate restTemplate= new RestTemplate();
-        // GET 요청 보내기
-        String response = restTemplate.getForObject(targetUrl, String.class);
 
-        // 여기서 응답을 처리하거나 로깅할 수 있습니다.
-        System.out.println("GET 요청 결과: " + response);
-    }
+
+    //초 분 시 일 월 요일
+
+//    @Scheduled(cron = "0 */50 * * * *")	//50분마다 실행
+//    public void realTimePer40() {
+//        RestTemplate restTemplate= new RestTemplate();
+//        // GET 요청 보내기
+//        String response = restTemplate.getForObject(targetUrl, String.class);
+//
+//        // 여기서 응답을 처리하거나 로깅할 수 있습니다.
+//        System.out.println("GET 요청 결과: " + response);
+//    }
+
+
+
+
+
+
 }
