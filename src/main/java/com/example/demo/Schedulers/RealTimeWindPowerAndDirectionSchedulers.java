@@ -13,8 +13,9 @@ public class RealTimeWindPowerAndDirectionSchedulers {
     public RealTimeWindPowerAndDirectionSchedulers(){
         restTemplate = new RestTemplate();
     }
-   // @Scheduled(cron = "0 0 */50 * * *")	//50분마다 실행
-    @Scheduled(cron = "0 * * * * *")	//TEST
+
+   // @Scheduled(cron = "0 * * * * *")	//TEST
+   @Scheduled(cron = "0 0 */50 * * *")	//50분마다 실행
     public void PerDay() throws InterruptedException {
 
         try {
@@ -26,12 +27,19 @@ public class RealTimeWindPowerAndDirectionSchedulers {
             //System.out.println("GET 요청 결과: " + response);
         }catch(Exception e){
 
+
             System.out.println("RealTimeWindPowerAndDirectionSchedulers ERROR : " + e.getMessage());
             System.out.println("20초 후다시 진행..");
-            Thread.sleep(20000);
-            String response = restTemplate.getForObject("http://localhost:8085/RTNOW", String.class);
+            Thread.sleep(20000);try {
+                String response = restTemplate.getForObject("http://localhost:8085/RTNOW", String.class);
+            }catch(Exception e1){
+                System.out.println("RealTimeWindPowerAndDirectionSchedulers ERROR_2 :" + e.getMessage() );
+                System.out.println("ERROR DB 저장하고 계속 스케쥴링.. 지금은 DB저장 생략" );
+            }
+
 
         }
     }
 
 }
+
