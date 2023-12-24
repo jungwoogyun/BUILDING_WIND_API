@@ -70,7 +70,7 @@ public class PointInPolygonController {
 
         Polygon polygon = new Polygon(polygonCoordinates);
 
-        double step = 0.005;//단위
+        double step = 0.005;//단위(0.001 은 : 146건,, 너무 널널하다..이걸로할까그냥..)
 
 //        첫 번째 소수점 자리는 최대 11.1km
 //        두 번째 소수점 자리는 1.1 km
