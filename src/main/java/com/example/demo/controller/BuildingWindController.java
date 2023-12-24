@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -59,58 +61,48 @@ public class  BuildingWindController {
         RestTemplate restTemplate = new RestTemplate();
 
         // 날짜구하기
-        Calendar cal = Calendar.getInstance();
-        String year = cal.get(Calendar.YEAR)+"";
-        String month = (cal.get(Calendar.MONTH) + 1)+""; // 월은 0부터 시작하므로 1을 더해줌
-        if(cal.get(Calendar.MONTH) + 1<10){
-            month ="0"+((cal.get(Calendar.MONTH) + 1)+"");
+        LocalDate currentDate = LocalDate.now();
+        // 출력 포맷을 지정하여 YYYY년 MM월 dd일 형식의 문자열로 변환
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYYMMdd");
+        String nowDate = currentDate.format(formatter);
+
+        LocalDateTime now = LocalDateTime.now();
+        //-------------------
+        //시간지정
+        //-------------------
+        //다음날로 넘어갔으면  이전날 마지막 시간으로 지정
+
+        String day = LocalDateTime.now().getDayOfMonth()+"";
+        String time = "";
+        System.out.println("now.getHour() : " + now.getHour());
+
+        if(now.getMinute()<45){
+            //만약시간이 45분전이라면 시간에서 -1 할것  // 만약시간이 45분이후라면 시간은 그대로 패스
+            time = (now.getHour()-1) + "";
+        }else {
+            time = now.getHour()+"";
         }
-        String day = cal.get(Calendar.DAY_OF_MONTH)+"";
-        if(Integer.parseInt(day) <10) {
-            day = "0" + day;
-        }
-
-        // 시간구하기
-        LocalTime now = LocalTime.now();// 현재 시간
-        System.out.println(now);   // 현재시간 출력
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH00"); // 포맷 정의하기
-        String time = now.format(formatter);      // 포맷 적용하기
-        if("0000".equals(time) || "0100".equals(time)|| "0200".equals(time) || "0300".equals(time)||"0400".equals(time)||"0500".equals(time)||"0600".equals(time))
-        {
-            time = "2300";
-            day = (cal.get(Calendar.DAY_OF_MONTH)-1)+"";
-
-        }else{
-            time = (Integer.parseInt(time) -100)+"";
-
-
-        }
-        if(Integer.parseInt(day.substring(0,2)) <10){
-
-            day = "0" + day;
-        }
-
-        if(time.length()<4)
+        //시간이 07~09라면
+        if(now.getHour()==7 ||now.getHour()==8||now.getHour()==9 ) {
             time = "0" + time;
+        }
+        //시간이 01~06시면 이전날짜로 , 마지막 시간대로 변경 -> 스케쥴러로 대체 해보자
+//        else if(now.getHour()<=6){
+//            day = (LocalDateTime.now().getDayOfMonth()-1) + "";
+//            time = "23";
+//        }
 
 
-        System.out.println("TIME : " + time);
-        this.nowTime = time;        //
-        String nowDate = year+month+day;
-        System.out.println("NOWDATE :" + nowDate);
 
+        System.out.println("TIME : " + time + " DAY : " + day + " NOWDATE : " + nowDate);
 
-        //0000시이면 이전 날짜로 처리
-
-
-        String pageNo ="1";
+        String pageNo = "1";
         String numOfRows = "10";
         String dataType = "JSON";
 
-        String base_time = "0600";
         String nx = RealTimeProperties.nx;
         String ny = RealTimeProperties.ny;
-
+        String base_time  = "0600";
 
         try {
             //URL 설정

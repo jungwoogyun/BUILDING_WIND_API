@@ -79,28 +79,42 @@ public class RealTimeWindPowerAndDirectionController {
 
         String day = LocalDateTime.now().getDayOfMonth()+"";
         String time = "";
+
+        System.out.println("now.getHour() : " + now.getHour());
+
+        if(now.getMinute()<30){
+            //만약시간이 30분전이라면 시간에서 -1 할것  // 만약시간이 45분이후라면 시간은 그대로 패스
+            time = (now.getHour()-1) + "30";
+        }else {
+            time = now.getHour()+"00";
+        }
+
+
+
+//        //시간이 01~06시면 이전날짜로 , 마지막 시간대로 변경 -> 스케쥴러로 대체 해보자
+//        else if(now.getHour()<=6){
+//            day = (LocalDateTime.now().getDayOfMonth()-1) + "";
+//            time = "23";
+//        }
+
+
+
         //시간이 07~09라면
-        if(now.getHour()==7 ||now.getHour()==8||now.getHour()==9 ){
-            time = "0"+now.getHour();
+        if(now.getHour()==7 ||now.getHour()==8||now.getHour()==9 ) {
+            time = "0" + time;
         }
-        //시간이 01~06시면 이전날짜로 , 마지막 시간대로 변경
-        if(now.getHour()<=6){
-            day = (LocalDateTime.now().getDayOfMonth()-1) + "";
-            time = "23";
-        }
+
         //일수가 0-9사이면 앞에 0 붙이기
         if (LocalDateTime.now().getDayOfMonth() < 10) {
             day = "0" + day;
         }
 
-        //시간 끝 뒷자리는 00으로 지정
-        time = time+"00";
 
         //날짜에Day 넣기
         nowDate = nowDate.substring(0,6) + day;
 
 
-        System.out.println("TIME : " + time + " DAY : " + day + " NOWDATE : " + nowDate);
+        System.out.println("TIME : " + time + " DAY : " + day + " NOWDATE : " + nowDate +" MINUTES : " + now.getMinute());
 
         String pageNo = "1";
         String numOfRows = "10";
@@ -108,7 +122,6 @@ public class RealTimeWindPowerAndDirectionController {
 
         String nx = RealTimeProperties.nx;
         String ny = RealTimeProperties.ny;
-
 
 
             //URL 설정
@@ -122,12 +135,10 @@ public class RealTimeWindPowerAndDirectionController {
                     "&ny=" + ny;
 
 
-
-
             //날짜시간 같은 데이터 있으면 삭제
             realTimeWindDirectionRepostitory.deleteAllBaseDateAndBaseTime(nowDate,time);
             realTimeWindPowerRepostitory.deleteAllBaseDateAndBaseTime(nowDate,time);
-            realTimeWindNowRepostitory.deleteAllBaseDateAndBaseTime(nowDate,time);
+            realTimeWindNowRepostitory.deleteAll();
 
             //요청보내기
             ResponseEntity<WeatherResponse> resp = restTemplate.exchange(url, HttpMethod.GET, null, WeatherResponse.class);
