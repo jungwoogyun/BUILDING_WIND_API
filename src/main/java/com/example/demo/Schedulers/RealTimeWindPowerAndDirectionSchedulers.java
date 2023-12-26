@@ -48,10 +48,7 @@ public class RealTimeWindPowerAndDirectionSchedulers {
             }catch(Exception e1){
                 System.out.println("RealTimeWindPowerAndDirectionSchedulers ERROR_"+(idx++)+" : " + e.getMessage());
                 realTimeErrorRepository.save(new RealTimeError(LocalDateTime.now(), "RT_NOW_ERROR_"+(idx++), e.getMessage()));
-
             }
-
-
         }
     }
 
