@@ -120,7 +120,7 @@ public class WindSpeedDataGenerator {
         polygonCoordinates.add(new Point(129.1222708, 35.1817435));
         polygonCoordinates.add(new Point(129.1256227, 35.1772272));
         polygonCoordinates.add(new Point(129.1222538, 35.1754207));
-
+        polygonCoordinates.add(new Point(129.1199534, 35.1805158)); //마지막은 처음 위경도와같게
 
         // 데이터 생성
         List<CentumPolygon> dataRows = generateCentumWindSpeedData(polygonCoordinates);
