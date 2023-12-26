@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GreenPolygon {
+public class LctPolygon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.controller.OpenWeatherAPIResponse;
-import com.example.demo.domain.entity.GreenPolygon;
-import com.example.demo.domain.repository.GreenPolygonRepository;
-import org.json.simple.JSONObject;
+import com.example.demo.domain.entity.LctPolygon;
+import com.example.demo.domain.repository.LctPolygonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +21,7 @@ import java.util.List;
 
 public class PointInPolygonController {
     @Autowired
-    private GreenPolygonRepository greenPolygonRepository;
+    private LctPolygonRepository lctPolygonRepository;
 
     public static class Point {
         double x;
@@ -59,7 +57,7 @@ public class PointInPolygonController {
 
     @GetMapping("/green")
     @Transactional(rollbackFor = Exception.class)
-    public  List<GreenPolygon> CreatePolygonGreen() throws InterruptedException {
+    public  List<LctPolygon> CreatePolygonGreen() throws InterruptedException {
         List<Point> polygonCoordinates = new ArrayList<>();
         polygonCoordinates.add(new Point(129.1622554, 35.1583793));
         polygonCoordinates.add(new Point(129.1686927, 35.1590459));
@@ -94,15 +92,15 @@ public class PointInPolygonController {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        List<GreenPolygon> list = new ArrayList<>();
+        List<LctPolygon> list = new ArrayList<>();
 
         // 결과 좌표 출력
         for (Point resultCoordinate : resultCoordinates) {
             System.out.println("Longitude: " + resultCoordinate.x + ", Latitude: " + resultCoordinate.y);
 
-            GreenPolygon greenPolygon = new GreenPolygon();
-            greenPolygon.setLat(resultCoordinate.y+"");
-            greenPolygon.setLon(resultCoordinate.x+"");
+            LctPolygon lctPolygon = new LctPolygon();
+            lctPolygon.setLat(resultCoordinate.y+"");
+            lctPolygon.setLon(resultCoordinate.x+"");
 
 //            JSONObject jsonObject = new JSONObject();
 //            jsonObject.put("lat",resultCoordinate.y);
@@ -116,12 +114,12 @@ public class PointInPolygonController {
 //            jsonObject.put("speed", response.getBody().getWind().getSpeed());
 //            jsonObject.put("deg", response.getBody().getWind().getDeg());
 //            list.add(jsonObject);
-            greenPolygon.setSpeed(response.getBody().getWind().getSpeed()+"");
-            greenPolygon.setDeg( response.getBody().getWind().getDeg()+"");
-            greenPolygon.setLocalDateTime(LocalDateTime.now());
-            greenPolygonRepository.save(greenPolygon);
+            lctPolygon.setSpeed(response.getBody().getWind().getSpeed()+"");
+            lctPolygon.setDeg( response.getBody().getWind().getDeg()+"");
+            lctPolygon.setLocalDateTime(LocalDateTime.now());
+            lctPolygonRepository.save(lctPolygon);
 
-            list.add(greenPolygon);
+            list.add(lctPolygon);
             Thread.sleep(1000);
 
 
