@@ -31,9 +31,17 @@ class Point {
 @Controller
 @RequestMapping("/gen")
 public class WindSpeedDataGenerator {
-    // 0.0008 : 220개 /0.0004 :800개정도        //0.0001 : 14315        0.0005? = 550개
-    private static final double latStepRatio = 0.0003;
-    private static final double lonStepRatio = 0.0003;
+    // 0.0008 : 220개   /0.0004 :800개정도        //0.0001 : 14315        0.0005? = 550개      0.0002 : 3560
+    //sample lat,lonRatio : 0.0002 / green red blue
+    private static final double latStepRatio = 0.0002;
+    private static final double lonStepRatio = 0.0002;
+
+    //greenRatio
+    private static final double greenRatio =   0.97;
+    //blueRatio
+    private static final double blueRatio = 0.025;
+    //RedRatio
+    private static final double redRatio =  0.005;
 
     @Autowired
     private LctPolygonRepository lctPolygonRepository;
@@ -61,6 +69,7 @@ public class WindSpeedDataGenerator {
         List<LctPolygon> dataRows = generateLctWindSpeedData(polygonCoordinates);
 
         System.out.println("총개수 : "  + dataRows.size());
+        lctPolygonRepository.deleteAll();
 
         dataRows.forEach(item->{
             lctPolygonRepository.save(item);
@@ -98,7 +107,7 @@ public class WindSpeedDataGenerator {
         polygonCoordinates.add(new Point(129.1417419, 35.1547127));
         polygonCoordinates.add(new Point(129.1338455, 35.1631684));
 
-
+        marinPolygonRepository.deleteAll();
         // 데이터 생성
         List<MarinPolygon> dataRows = generateMarinWindSpeedData(polygonCoordinates);
 
@@ -126,7 +135,7 @@ public class WindSpeedDataGenerator {
         List<CentumPolygon> dataRows = generateCentumWindSpeedData(polygonCoordinates);
 
         System.out.println("총개수 : "  + dataRows.size());
-
+        centumPolygonRepository.deleteAll();
         dataRows.forEach(item->{
             centumPolygonRepository.save(item);
         });
@@ -171,9 +180,9 @@ public class WindSpeedDataGenerator {
         int count =0;
         Set<Integer> set = new HashSet<>();
 
-        int speed80 =  (int)Math.ceil(list.size() * 0.9);
-        int speed15 =  (int)Math.ceil(list.size() * 0.08);
-        int speed05 =  (int)Math.ceil(list.size() * 0.02);
+        int speed80 =  (int)Math.ceil(list.size() * greenRatio);
+        int speed15 =  (int)Math.ceil(list.size() * blueRatio);
+        int speed05 =  (int)Math.ceil(list.size() * redRatio);
 
         Integer[] arr = new Integer[total];
 
@@ -253,9 +262,9 @@ public class WindSpeedDataGenerator {
         int count =0;
         Set<Integer> set = new HashSet<>();
 
-        int speed80 =  (int)Math.ceil(list.size() * 0.9);
-        int speed15 =  (int)Math.ceil(list.size() * 0.08);
-        int speed05 =  (int)Math.ceil(list.size() * 0.02);
+        int speed80 =  (int)Math.ceil(list.size() * greenRatio);
+        int speed15 =  (int)Math.ceil(list.size() * blueRatio);
+        int speed05 =  (int)Math.ceil(list.size() * redRatio);
 
         Integer[] arr = new Integer[total];
 
@@ -336,9 +345,9 @@ public class WindSpeedDataGenerator {
         int count =0;
         Set<Integer> set = new HashSet<>();
 
-        int speed80 =  (int)Math.ceil(list.size() * 0.9);
-        int speed15 =  (int)Math.ceil(list.size() * 0.08);
-        int speed05 =  (int)Math.ceil(list.size() * 0.02);
+        int speed80 =  (int)Math.ceil(list.size() * greenRatio);
+        int speed15 =  (int)Math.ceil(list.size() * blueRatio);
+        int speed05 =  (int)Math.ceil(list.size() * redRatio);
 
         Integer[] arr = new Integer[total];
 
