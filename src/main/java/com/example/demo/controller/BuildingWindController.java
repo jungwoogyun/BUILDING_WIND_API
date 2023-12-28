@@ -78,9 +78,9 @@ public class  BuildingWindController {
 
         if(now.getMinute()<45){
             //만약시간이 45분전이라면 시간에서 -1 할것  // 만약시간이 45분이후라면 시간은 그대로 패스
-            time = (now.getHour()-1) + "";
+            time = (now.getHour()-1) + "30";
         }else {
-            time = now.getHour()+"";
+            time = now.getHour()+"00";
         }
         //시간이 07~09라면
         if(now.getHour()==7 ||now.getHour()==8||now.getHour()==9 ) {
@@ -91,6 +91,15 @@ public class  BuildingWindController {
 //            day = (LocalDateTime.now().getDayOfMonth()-1) + "";
 //            time = "23";
 //        }
+
+        //새벽00시라면
+        if(now.getHour()<7){
+            time="2300";
+            // 현재 날짜 얻기
+            currentDate = currentDate.minusDays(1);
+            nowDate = currentDate.format(formatter);
+
+        }
 
 
 
@@ -210,6 +219,9 @@ public class  BuildingWindController {
                         realTimeWindDirectionRepostitory.save(realTimeWindDirection);
                     }
                 });
+                
+                if(base_time.equals(time))
+                    break;
             }
 
         }catch(NullPointerException e){
@@ -219,6 +231,7 @@ public class  BuildingWindController {
             //String response = restTemplate.getForObject("http://localhost:8085/realTime", String.class);
 
         }
+
 
 
     }
