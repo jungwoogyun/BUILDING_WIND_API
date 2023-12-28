@@ -30,7 +30,8 @@ public class RealTimeWindPowerAndDirectionSchedulers {
    //@Scheduled(cron = "0 40 * * * *")
    //@Scheduled(cron = "0 22,42 6-23/1 * * *")     //6-23/1은 6부터 23까지의 모든 시간 값을 1씩 증가 + 50분마다
 
-    @Scheduled(cron = "0 */10 * * * *")	//TEST
+//    /@Scheduled(cron = "0 */10 * * * *")	//TEST
+    //@Scheduled(cron = "0 22,42 6-23/1 * * *")     //6-23/1은 6부터 23까지의 모든 시간 값을 1씩 증가 + 50분마다
     public void PerDay() throws InterruptedException {
 
         try {
