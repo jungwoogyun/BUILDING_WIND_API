@@ -69,33 +69,15 @@ public class  BuildingWindController {
         //다음날로 넘어갔으면  이전날 마지막 시간으로 지정
 
         String day = LocalDateTime.now().getDayOfMonth() + "";
-        String time = "";
+        String time = (now.getHour())+"00";
         System.out.println("now.getHour() : " + now.getHour());
 
-        if (now.getMinute() < 45) {
-            //만약시간이 45분전이라면 시간에서 -1 할것  // 만약시간이 45분이후라면 시간은 그대로 패스
-            time = (now.getHour() - 1) + "30";
-        } else {
-            time = now.getHour() + "00";
-        }
-        //시간이 07~09라면
-        if (now.getHour() == 7 || now.getHour() == 8 || now.getHour() == 9) {
+        if((now.getHour())<10){
             time = "0" + time;
         }
-        //시간이 01~06시면 이전날짜로 , 마지막 시간대로 변경 -> 스케쥴러로 대체 해보자
-//        else if(now.getHour()<=6){
-//            day = (LocalDateTime.now().getDayOfMonth()-1) + "";
-//            time = "23";
-//        }
 
-        //새벽00시라면
-        if (now.getHour() < 7) {
-            time = "2300";
-            // 현재 날짜 얻기
-            currentDate = currentDate.minusDays(1);
-            nowDate = currentDate.format(formatter);
 
-        }
+
 
 
         System.out.println("TIME : " + time + " DAY : " + day + " NOWDATE : " + nowDate);
@@ -173,8 +155,10 @@ public class  BuildingWindController {
             calendar.add(Calendar.HOUR, 1);
             // 변환된 시간을 다시 문자열로 형식화
             base_time = sdf.format(calendar.getTime());
-            System.out.println("base_time : " + base_time);
+            System.out.println("base_time : " + base_time+" , time : " + time);
 
+            if (base_time.equals(time))
+                break;
 
             url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=" + serviceKey +
                     "&pageNo=" + pageNo +
@@ -214,8 +198,7 @@ public class  BuildingWindController {
                 }
             });
 
-            if (base_time.equals(time))
-                break;
+
         }
 
     }
