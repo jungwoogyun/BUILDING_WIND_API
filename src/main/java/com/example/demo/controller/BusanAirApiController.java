@@ -56,7 +56,7 @@ public class BusanAirApiController {
         String controlnumber=nowDate+time;
         String item="pm10"; //미세먼지
 
-        busanAirRepository.deleteAll();
+
 
         String url = "https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=xYZ80mMcU8S57mCCY%2Fq8sRsk7o7G8NtnfnK7mVEuVxdtozrl0skuhvNf34epviHrru%2FjiRQ41FokE9H4lK0Hhg%3D%3D&returnType=json&numOfRows=100&pageNo=1&sidoName=부산&ver=1.0";
 
@@ -67,6 +67,9 @@ public class BusanAirApiController {
         System.out.println(response);
         System.out.println(response.getBody());
 
+
+        busanAirRepository.deleteAll();
+        
         ArrayList<Item> items =  response.getBody().getResponse().getBody().getItems();
         items.forEach(i -> {
             if(i.getStationName().equals("우동")) {

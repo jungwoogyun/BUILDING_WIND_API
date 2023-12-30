@@ -56,13 +56,13 @@ public class Busan자외선ApiController {
 
         System.out.println("time : " + time);
 
-        busanZaRepository.deleteAll();
+
         String url = "https://apis.data.go.kr/1360000/LivingWthrIdxServiceV4/getUVIdxV4?serviceKey=xYZ80mMcU8S57mCCY%2Fq8sRsk7o7G8NtnfnK7mVEuVxdtozrl0skuhvNf34epviHrru%2FjiRQ41FokE9H4lK0Hhg%3D%3D&pageNo=1&numOfRows=100&dataType=json&areaNo=2635052000&time="+time;
 
 
         ResponseEntity<Root> response = restTemplate.exchange(url, HttpMethod.GET,null, Root.class);
         System.out.println(response.getBody());
-
+        busanZaRepository.deleteAll();
         response.getBody().getResponse().getBody().getItems().getItem().forEach(item -> {
 
             BusanZa busanZa = new BusanZa();
